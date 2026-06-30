@@ -1,0 +1,82 @@
+# Autional SDK — One-Command Setup Guide
+
+> **What this does**: Add authentication to your existing app with one AI prompt.
+> **Target**: Any framework (React, Vue, Next.js, Node.js, etc.)
+> **Time**: ~30 minutes for a standard SaaS application.
+
+## Prerequisites
+
+- A running Autional instance (local or cloud)
+- Your app's source code
+- An AI coding assistant (Cursor, Claude Code, or any LLM)
+
+## Step 1: Run Autional (if not already)
+
+```bash
+git clone https://github.com/autional/authms
+cd authms
+docker compose -f docker-compose.infra.yml -f docker-compose.monolith.yml up -d
+```
+
+## Step 2: Let AI Integrate
+
+Give this prompt to your AI coding assistant:
+
+```
+Use the Autional SDK Migration Skill to add multi-user authentication to my project.
+Follow the 8-phase process: analyze → recommend → register → install → code → test → verify → finalize.
+Phase 3 (tenant registration): use invitation code AUTHMS-DEV-001.
+```
+
+The AI will:
+
+1. **Analyze** your codebase (detect framework, existing auth)
+2. **Recommend** security policy (NIST-based)
+3. **Register** a tenant
+4. **Install** the correct SDK packages
+5. **Add** auth components to your app
+6. **Test** that everything works
+7. **Verify** security compliance
+8. **Document** the setup for your team
+
+## How It Works
+
+```
+                    ┌─────────────────────┐
+                    │  Your AI Assistant   │
+                    │  (Cursor/Claude/...) │
+                    └──────┬──────┬───────┘
+                           │      │
+                    ┌──────▼─┐ ┌─▼────────┐
+                    │ Your   │ │ Autional │
+                    │ Code   │ │ APIs     │
+                    └────────┘ └──────────┘
+```
+
+The AI reads your codebase, calls Autional APIs to register and configure, then modifies your code — all in one conversation.
+
+## What You Get
+
+- **Authentication**: Login, register, logout, token refresh
+- **Security**: SHA-256 password transmission, JWT tokens
+- **Multi-user**: Complete user management
+- **Zero CORS issues**: Built-in proxy configuration
+- **Test suite**: Existing tests continue to pass (89/89 in our test)
+
+## Common Issues & Solutions
+
+| Issue | Solution |
+|-------|----------|
+| API returns 404 | Check path includes `/tenant/` segment: `/bff/tenant/api/v1/tenant/public/tenants` |
+| Password error | Use format: `SHA-256(rawPassword + "|" + tenantId)` |
+| CORS errors | Configure Next.js `rewrites` or equivalent proxy |
+| Build fails: `Uint32Array` | Add `"downlevelIteration": true` to `tsconfig.json` |
+| `appId` required | Set to any non-empty string (e.g., project name) |
+
+## Reference
+
+| Resource | URL |
+|----------|-----|
+| SDK Migration Skill | `https://github.com/autional/authms/tree/main/sdk/.skills/sdk-migration-guide` |
+| SDK Packages | `@autional/core`, `@autional/react`, `@autional/vue`, `@autional/next` |
+| API Gateway | `http://localhost:11080/docs/` |
