@@ -1,0 +1,18 @@
+---
+import DevLayout from '../layouts/DevLayout.astro';
+const steps = [
+  { from: 'Auth0', steps: ['Create Autional tenant → configure Auth0 as IdP', 'Export Auth0 rules → migrate to Autional Actions', 'Update SDK from auth0-js to @autional/core', 'Verify token validation with Autional JWKS endpoint'], time: '1-2 days' },
+  { from: 'Clerk', steps: ['Export users via Clerk API → import to Autional tenant', 'Replace Clerk components with @autional/react components', 'Update webhook endpoints to Autional event format', 'Verify SSO + MFA configuration on Autional Admin Console'], time: '2-3 days' },
+  { from: 'Firebase Auth', steps: ['Export users from Firebase → import via Autional Admin API', 'Replace Firebase SDK with @autional/react', 'Migrate custom claims to Autional RBAC roles', 'Reconfigure social login providers in Autional'], time: '3-5 days' },
+  { from: 'Keycloak', steps: ['Export Keycloak realm → Autional tenant config', 'Synchronize users via SCIM 2.0 protocol', 'Map Keycloak roles to Autional RBAC', 'Update application SDK to @autional/\*'], time: '3-5 days' },
+];
+---
+<DevLayout title="Migration Guide — Autional Developers">
+  <div class="text-center mb-12"><h1 class="text-4xl font-bold sm:text-5xl">Migration Guides</h1><p class="mt-4 text-lg text-neutral-500">Move from your current auth provider to Autional. Estimated times for a standard SaaS application.</p></div>
+  <div class="space-y-8">{steps.map(s => (
+    <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
+      <div class="flex items-center gap-3 mb-4"><h2 class="text-xl font-bold">From {s.from}</h2><span class="rounded-full bg-primary-50 text-primary-700 px-2 py-0.5 text-xs font-medium">Est. {s.time}</span></div>
+      <ol class="space-y-2">{s.steps.map((step,i) => <li class="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300"><span class="flex h-5 w-5 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 text-xs font-medium shrink-0 mt-0.5">{i+1}</span>{step}</li>)}</ol>
+    </div>
+  ))}</div>
+</DevLayout>

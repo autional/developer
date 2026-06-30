@@ -1,0 +1,20 @@
+---
+import DevLayout from '../layouts/DevLayout.astro';
+---
+<DevLayout title="API Reference — Autional Developers">
+  <div class="text-center mb-12"><h1 class="text-4xl font-bold sm:text-5xl">API Reference</h1><p class="mt-4 text-lg text-neutral-500">1,400+ REST endpoints across 24 microservices. Each service has interactive Swagger/OpenAPI documentation.</p></div>
+  <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 mb-6">
+    <h2 class="text-lg font-bold mb-2">Interactive Docs</h2>
+    <p class="text-sm text-neutral-600 mb-2">Run locally and visit:</p>
+    <pre class="rounded-lg bg-slate-900 text-green-400 p-4 text-sm overflow-x-auto">http://localhost:11080/docs/</pre>
+  </div>
+  <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 mb-6">
+    <h2 class="text-lg font-bold mb-2">Gateway Aggregated Spec</h2>
+    <pre class="rounded-lg bg-slate-900 text-green-400 p-4 text-sm overflow-x-auto mb-2">http://localhost:11080/docs/openapi.json</pre>
+    <p class="text-sm text-neutral-600">Import into Postman, Insomnia, or any OpenAPI-compatible tool.</p>
+  </div>
+  <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
+    <h2 class="text-lg font-bold mb-2">Raw Specs on GitHub</h2>
+    <pre class="rounded-lg bg-slate-900 text-green-400 p-4 text-sm overflow-x-auto">https://github.com/autional/authms/tree/main/docker/specs</pre>
+  </div>
+</DevLayout>
