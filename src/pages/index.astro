@@ -1,0 +1,43 @@
+---
+import DevLayout from '../layouts/DevLayout.astro';
+const packages = [
+  { name: '@autional/core', desc: 'Token management, API client, auth flows', install: 'npm install @autional/core' },
+  { name: '@autional/react', desc: 'React SDK — AuthProvider, useAuth, RequireAuth', install: 'npm install @autional/react @autional/core' },
+  { name: '@autional/vue', desc: 'Vue 3 SDK — plugin, composables, guards', install: 'npm install @autional/vue @autional/core' },
+  { name: '@autional/next', desc: 'Next.js App Router SDK', install: 'npm install @autional/next @autional/core' },
+  { name: '@autional/node', desc: 'Node.js server middleware', install: 'npm install @autional/node' },
+  { name: '@autional/miniapp', desc: 'WeChat Mini Program adapter', install: 'npm install @autional/miniapp @autional/core' },
+  { name: '@autional/react-native', desc: 'React Native SDK', install: 'npm install @autional/react-native @autional/core' },
+  { name: '@autional/plugin-mfa', desc: 'MFA setup flows', install: 'npm install @autional/plugin-mfa' },
+  { name: '@autional/plugin-passkey', desc: 'Passkey registration and assertion', install: 'npm install @autional/plugin-passkey' },
+  { name: '@autional/plugin-tenant', desc: 'Multi-tenant organization management', install: 'npm install @autional/plugin-tenant' },
+];
+const apis = [
+  'api-identity','api-mfa','api-oauth','api-session','api-profile','api-tenant','api-rbac',
+  'api-billing','api-audit','api-compliance','api-wallet','api-point','api-pay','api-storage',
+  'api-notification','api-communication','api-secret','api-status','api-saml','api-verification',
+];
+---
+<DevLayout title="SDK — Autional Developers">
+  <div class="text-center mb-12"><h1 class="text-4xl font-bold sm:text-5xl">SDK</h1><p class="mt-4 text-lg text-neutral-500">31 packages. One import. Full identity.</p></div>
+  <div class="grid gap-4"><h2 class="text-xl font-bold mb-2">Framework SDKs</h2>
+    {packages.map(p => (
+      <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-5 flex items-center justify-between">
+        <div><code class="text-sm font-mono font-semibold text-primary-700">{p.name}</code><p class="text-sm text-neutral-500 mt-1">{p.desc}</p></div>
+        <code class="text-xs text-neutral-400 shrink-0 ml-4">{p.install}</code>
+      </div>
+    ))}
+  </div>
+  <div class="grid gap-4 mt-10"><h2 class="text-xl font-bold mb-2">API Clients (auto-generated)</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {apis.map(a => (
+        <div class="rounded-lg border border-neutral-200 dark:border-neutral-800 p-3"><code class="text-xs font-mono text-primary-600">@autional/{a}</code></div>
+      ))}
+    </div>
+  </div>
+  <div class="mt-12 rounded-2xl bg-primary-50 dark:bg-primary-900/10 border border-primary-100 dark:border-primary-900/20 p-8 text-center">
+    <h2 class="text-xl font-bold">Ready to ship?</h2>
+    <p class="mt-2 text-neutral-500">Pick your framework and add auth in one line.</p>
+    <pre class="mt-4 inline-block rounded-lg bg-slate-900 text-green-400 px-6 py-3 text-sm font-mono">npm install @autional/react @autional/core</pre>
+  </div>
+</DevLayout>
