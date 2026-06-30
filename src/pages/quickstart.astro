@@ -1,82 +1,132 @@
-# Autional SDK — One-Command Setup Guide
+---
+import DevLayout from '../layouts/DevLayout.astro';
 
-> **What this does**: Add authentication to your existing app with one AI prompt.
-> **Target**: Any framework (React, Vue, Next.js, Node.js, etc.)
-> **Time**: ~30 minutes for a standard SaaS application.
+const prerequisites = [
+  'A running Autional environment, either local Docker or cloud.',
+  'Your application source code ready for SDK integration.',
+  'An AI coding assistant such as Cursor, Claude Code, or another capable LLM.',
+];
 
-## Prerequisites
-
-- A running Autional instance (local or cloud)
-- Your app's source code
-- An AI coding assistant (Cursor, Claude Code, or any LLM)
-
-## Step 1: Run Autional (if not already)
-
-```bash
-git clone https://github.com/autional/authms
+const steps = [
+  {
+    title: 'Boot the platform',
+    copy: 'Start the local Autional stack so the assistant can register tenants, inspect APIs, and verify the final flow against a real environment.',
+    command: `git clone https://github.com/autional/authms
 cd authms
-docker compose -f docker-compose.infra.yml -f docker-compose.monolith.yml up -d
-```
+docker compose -f docker-compose.infra.yml -f docker-compose.monolith.yml up -d`,
+  },
+  {
+    title: 'Give the assistant the migration prompt',
+    copy: 'Use a structured prompt so the assistant can analyze the project, select the right SDK package, and apply the integration with verifiable output.',
+    command: `Use the Autional SDK Migration Skill to add multi-user authentication to my project.
+Follow the 8-phase process: analyze -> recommend -> register -> install -> code -> test -> verify -> finalize.
+Phase 3 (tenant registration): use invitation code AUTHMS-DEV-001.`,
+  },
+  {
+    title: 'Review and validate',
+    copy: 'Once the code is generated, verify tenant registration, proxy rules, and end-to-end auth behavior before rolling the change to your team.',
+    command: `curl http://localhost:11080/health
+open http://localhost:11080/docs/
+npm test`,
+  },
+];
 
-## Step 2: Let AI Integrate
+const outcomes = [
+  'Authentication flows: login, registration, logout, refresh, and profile retrieval.',
+  'Security defaults: SHA-256 password transmission, JWT verification, and tenant-aware flows.',
+  'Operational setup: proxy guidance that avoids cross-origin issues during local development.',
+  'Project hygiene: integration notes your team can keep after the AI finishes the first pass.',
+];
 
-Give this prompt to your AI coding assistant:
+const issues = [
+  ['API returns 404', 'Check that the request path includes the /tenant/ segment, for example /bff/tenant/api/v1/tenant/public/tenants.'],
+  ['Password error', 'Use SHA-256(rawPassword + "|" + tenantId) when testing the login payload.'],
+  ['CORS errors', 'Configure framework rewrites or a development proxy instead of calling the gateway directly from the browser.'],
+  ['Build fails: Uint32Array', 'Add "downlevelIteration": true to tsconfig.json if your target tooling requires it.'],
+  ['appId required', 'Set appId to any non-empty identifier such as the current project name.'],
+];
+---
+<DevLayout title="Quickstart — Autional Developers">
+  <section class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+    <div>
+      <span class="brand-kicker">Quickstart</span>
+      <h1 class="mt-6 text-5xl font-extrabold leading-[1.06] tracking-[-0.06em] text-primary-900 sm:text-6xl">
+        Add authentication to an existing app in one guided run.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
+        This quickstart is built for teams using AI-assisted integration. Start the Autional stack, give the assistant a structured migration prompt, and verify the result against live APIs instead of mock flows.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/" class="brand-button-primary">Browse SDK Packages</a>
+        <a href="/migration" class="brand-button-secondary">See Migration Guides</a>
+      </div>
+    </div>
 
-```
-Use the Autional SDK Migration Skill to add multi-user authentication to my project.
-Follow the 8-phase process: analyze → recommend → register → install → code → test → verify → finalize.
-Phase 3 (tenant registration): use invitation code AUTHMS-DEV-001.
-```
+    <div class="brand-card px-6 py-7">
+      <span class="brand-kicker">Prerequisites</span>
+      <ul class="mt-6 space-y-3">
+        {prerequisites.map((item) => (
+          <li class="flex gap-3 text-sm leading-7 text-neutral-600">
+            <span class="mt-2 h-2.5 w-2.5 rounded-full bg-sky-400"></span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-6 rounded-2xl border border-amber-100 bg-amber-50/80 px-4 py-4 text-sm leading-7 text-neutral-700">
+        A standard SaaS application usually gets to a first working integration in about 30 minutes when the assistant can inspect the real codebase.
+      </div>
+    </div>
+  </section>
 
-The AI will:
+  <section class="mt-16">
+    <div>
+      <span class="brand-kicker">Three Steps</span>
+      <h2 class="mt-4 text-3xl font-bold tracking-[-0.04em] text-primary-900">Move from blank integration to verified auth flow.</h2>
+    </div>
+    <div class="mt-8 grid gap-5 lg:grid-cols-3">
+      {steps.map((step, index) => (
+        <div class="brand-card px-6 py-6">
+          <div class="flex items-center gap-3">
+            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-700 text-sm font-bold text-white">{index + 1}</span>
+            <h3 class="text-xl font-semibold text-primary-900">{step.title}</h3>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-neutral-600">{step.copy}</p>
+          <pre class="developer-code mt-5">{step.command}</pre>
+        </div>
+      ))}
+    </div>
+  </section>
 
-1. **Analyze** your codebase (detect framework, existing auth)
-2. **Recommend** security policy (NIST-based)
-3. **Register** a tenant
-4. **Install** the correct SDK packages
-5. **Add** auth components to your app
-6. **Test** that everything works
-7. **Verify** security compliance
-8. **Document** the setup for your team
+  <section class="mt-16 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+    <div class="brand-card px-6 py-7">
+      <span class="brand-kicker">What You Get</span>
+      <div class="mt-6 space-y-4">
+        {outcomes.map((item) => (
+          <div class="rounded-2xl border border-primary-100 bg-primary-50/70 px-4 py-4 text-sm leading-7 text-neutral-700">{item}</div>
+        ))}
+      </div>
+    </div>
 
-## How It Works
-
-```
-                    ┌─────────────────────┐
-                    │  Your AI Assistant   │
-                    │  (Cursor/Claude/...) │
-                    └──────┬──────┬───────┘
-                           │      │
-                    ┌──────▼─┐ ┌─▼────────┐
-                    │ Your   │ │ Autional │
-                    │ Code   │ │ APIs     │
-                    └────────┘ └──────────┘
-```
-
-The AI reads your codebase, calls Autional APIs to register and configure, then modifies your code — all in one conversation.
-
-## What You Get
-
-- **Authentication**: Login, register, logout, token refresh
-- **Security**: SHA-256 password transmission, JWT tokens
-- **Multi-user**: Complete user management
-- **Zero CORS issues**: Built-in proxy configuration
-- **Test suite**: Existing tests continue to pass (89/89 in our test)
-
-## Common Issues & Solutions
-
-| Issue | Solution |
-|-------|----------|
-| API returns 404 | Check path includes `/tenant/` segment: `/bff/tenant/api/v1/tenant/public/tenants` |
-| Password error | Use format: `SHA-256(rawPassword + "|" + tenantId)` |
-| CORS errors | Configure Next.js `rewrites` or equivalent proxy |
-| Build fails: `Uint32Array` | Add `"downlevelIteration": true` to `tsconfig.json` |
-| `appId` required | Set to any non-empty string (e.g., project name) |
-
-## Reference
-
-| Resource | URL |
-|----------|-----|
-| SDK Migration Skill | `https://github.com/autional/authms/tree/main/sdk/.skills/sdk-migration-guide` |
-| SDK Packages | `@autional/core`, `@autional/react`, `@autional/vue`, `@autional/next` |
-| API Gateway | `http://localhost:11080/docs/` |
+    <div class="brand-card px-6 py-7">
+      <span class="brand-kicker">Common Issues</span>
+      <div class="mt-6 overflow-hidden rounded-3xl border border-primary-100">
+        <table class="w-full border-collapse text-left text-sm">
+          <thead class="bg-primary-900 text-white">
+            <tr>
+              <th class="px-4 py-3 font-medium">Issue</th>
+              <th class="px-4 py-3 font-medium">Resolution</th>
+            </tr>
+          </thead>
+          <tbody>
+            {issues.map(([issue, solution]) => (
+              <tr class="border-t border-primary-100 bg-white">
+                <td class="px-4 py-4 font-medium text-primary-900">{issue}</td>
+                <td class="px-4 py-4 leading-7 text-neutral-600">{solution}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</DevLayout>
