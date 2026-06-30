@@ -8,11 +8,30 @@ const steps = [
 ];
 ---
 <DevLayout title="Migration Guide — Autional Developers">
-  <div class="text-center mb-12"><h1 class="text-4xl font-bold sm:text-5xl">Migration Guides</h1><p class="mt-4 text-lg text-neutral-500">Move from your current auth provider to Autional. Estimated times for a standard SaaS application.</p></div>
-  <div class="space-y-8">{steps.map(s => (
-    <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
-      <div class="flex items-center gap-3 mb-4"><h2 class="text-xl font-bold">From {s.from}</h2><span class="rounded-full bg-primary-50 text-primary-700 px-2 py-0.5 text-xs font-medium">Est. {s.time}</span></div>
-      <ol class="space-y-2">{s.steps.map((step,i) => <li class="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-300"><span class="flex h-5 w-5 items-center justify-center rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 text-xs font-medium shrink-0 mt-0.5">{i+1}</span>{step}</li>)}</ol>
-    </div>
-  ))}</div>
+  <section class="text-center">
+    <span class="brand-kicker">Migration Guides</span>
+    <h1 class="mt-6 text-5xl font-extrabold tracking-[-0.06em] text-primary-900 sm:text-6xl">Cut over from your current auth stack without losing control.</h1>
+    <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-neutral-600">
+      These playbooks focus on practical migration work: tenant setup, user export and import, SDK replacement, policy mapping, and final verification.
+    </p>
+  </section>
+
+  <section class="mt-14 space-y-6">
+    {steps.map((s) => (
+      <div class="brand-card px-6 py-6">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 class="text-2xl font-bold tracking-[-0.03em] text-primary-900">From {s.from}</h2>
+          <span class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary-700">Est. {s.time}</span>
+        </div>
+        <ol class="mt-6 space-y-3">
+          {s.steps.map((step, i) => (
+            <li class="flex items-start gap-3 text-sm leading-7 text-neutral-600">
+              <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-700 text-xs font-bold text-white">{i + 1}</span>
+              <span>{step}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    ))}
+  </section>
 </DevLayout>

@@ -1,22 +1,69 @@
 ---
+import '../styles/global.css';
+
 const { title = 'Autional for Developers' } = Astro.props;
+const pathname = Astro.url.pathname;
+const navigation = [
+  { href: '/', label: 'SDK' },
+  { href: '/quickstart', label: 'Quickstart' },
+  { href: '/migration', label: 'Migration' },
+  { href: '/api', label: 'API' },
+];
 ---
-<!DOCTYPE html><html lang="en">
-<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>{title}</title><link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-</head>
-<body class="min-h-screen bg-white dark:bg-slate-950 text-neutral-900 dark:text-white antialiased">
-  <header class="border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-50">
-    <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-      <a href="/" class="text-lg font-bold text-primary-600">Autional <span class="text-neutral-500 font-normal">/ Developers</span></a>
-      <a href="https://www.autional.com" class="ml-4 text-xs text-neutral-400 hover:text-primary-600">← Back to www</a>
-      <nav class="flex items-center gap-6 text-sm">
-        <a href="/" class="hover:text-primary-600">SDK</a>
-        <a href="/migration" class="hover:text-primary-600">Migration</a>
-        <a href="/api" class="hover:text-primary-600">API</a>
-        <a href="https://www.autional.com" class="hover:text-primary-600">Home →</a>
-      </nav>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700;800&family=Source+Han+Serif+SC:wght@600&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen text-neutral-900">
+    <div class="relative overflow-hidden">
+      <div class="absolute inset-x-0 top-0 -z-10 h-[34rem] bg-gradient-to-b from-sky-100/65 via-white/0 to-transparent"></div>
+      <header class="sticky top-0 z-50 border-b border-white/60 bg-white/80 backdrop-blur-xl">
+        <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
+          <a href="/" class="flex items-center gap-4">
+            <img src="/logo-mark.svg" alt="Autional logo" class="h-10 w-10 object-contain" />
+            <div>
+              <div class="text-lg font-extrabold tracking-[-0.04em] text-primary-800">Autional</div>
+              <div class="text-xs font-medium uppercase tracking-[0.28em] text-neutral-400">Developers</div>
+            </div>
+          </a>
+          <div class="hidden items-center gap-6 md:flex">
+            <nav class="flex items-center gap-5">
+              {navigation.map((item) => (
+                <a href={item.href} class="developer-nav-link" data-active={pathname === item.href ? 'true' : 'false'}>{item.label}</a>
+              ))}
+            </nav>
+            <a href="https://www.autional.com" class="brand-button-secondary px-4 py-2 text-xs">Back To Main Site</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-8">
+        <slot />
+      </main>
+
+      <footer class="border-t border-primary-100/80 bg-primary-900 text-white">
+        <div class="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-12 sm:px-6 lg:flex-row lg:items-start lg:justify-between lg:px-8">
+          <div class="max-w-md">
+            <div class="text-2xl font-extrabold tracking-[-0.04em]">Autional</div>
+            <p class="mt-4 text-sm leading-7 text-sky-100/80">
+              Developer-ready identity infrastructure with SDKs, migration guides, OpenAPI references, and integration paths for modern product teams.
+            </p>
+          </div>
+          <div class="grid gap-3 text-sm text-sky-100/80">
+            {navigation.map((item) => (
+              <a href={item.href} class="transition hover:text-white">{item.label}</a>
+            ))}
+            <a href="https://www.autional.com" class="transition hover:text-white">Company Site</a>
+          </div>
+        </div>
+      </footer>
     </div>
-  </header>
-  <main class="flex-1 max-w-6xl mx-auto px-4 py-12"><slot/></main>
-</body></html>
+  </body>
+</html>

@@ -1,20 +1,45 @@
 ---
 import DevLayout from '../layouts/DevLayout.astro';
+
+const endpoints = [
+  ['Gateway Docs', 'http://localhost:11080/docs/', 'Interactive OpenAPI UI exposed from the gateway.'],
+  ['Gateway Spec', 'http://localhost:11080/docs/openapi.json', 'Aggregate JSON spec for client tooling and contract inspection.'],
+  ['Raw Specs', 'https://github.com/autional/authms/tree/main/docker/specs', 'Source-controlled service specs for auditing and generation.'],
+];
 ---
 <DevLayout title="API Reference — Autional Developers">
-  <div class="text-center mb-12"><h1 class="text-4xl font-bold sm:text-5xl">API Reference</h1><p class="mt-4 text-lg text-neutral-500">1,400+ REST endpoints across 24 microservices. Each service has interactive Swagger/OpenAPI documentation.</p></div>
-  <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 mb-6">
-    <h2 class="text-lg font-bold mb-2">Interactive Docs</h2>
-    <p class="text-sm text-neutral-600 mb-2">Run locally and visit:</p>
-    <pre class="rounded-lg bg-slate-900 text-green-400 p-4 text-sm overflow-x-auto">http://localhost:11080/docs/</pre>
-  </div>
-  <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6 mb-6">
-    <h2 class="text-lg font-bold mb-2">Gateway Aggregated Spec</h2>
-    <pre class="rounded-lg bg-slate-900 text-green-400 p-4 text-sm overflow-x-auto mb-2">http://localhost:11080/docs/openapi.json</pre>
-    <p class="text-sm text-neutral-600">Import into Postman, Insomnia, or any OpenAPI-compatible tool.</p>
-  </div>
-  <div class="rounded-xl border border-neutral-200 dark:border-neutral-800 p-6">
-    <h2 class="text-lg font-bold mb-2">Raw Specs on GitHub</h2>
-    <pre class="rounded-lg bg-slate-900 text-green-400 p-4 text-sm overflow-x-auto">https://github.com/autional/authms/tree/main/docker/specs</pre>
-  </div>
+  <section class="text-center">
+    <span class="brand-kicker">API Surface</span>
+    <h1 class="mt-6 text-5xl font-extrabold tracking-[-0.06em] text-primary-900 sm:text-6xl">1,400+ REST endpoints behind one developer entry point.</h1>
+    <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-neutral-600">
+      Inspect live Swagger docs through the gateway, pull the aggregate spec for tooling, or audit raw service contracts directly from source control.
+    </p>
+  </section>
+
+  <section class="mt-14 grid gap-5 lg:grid-cols-3">
+    {endpoints.map(([name, url, description]) => (
+      <div class="brand-card px-6 py-6">
+        <h2 class="text-xl font-semibold text-primary-900">{name}</h2>
+        <p class="mt-3 text-sm leading-7 text-neutral-600">{description}</p>
+        <pre class="developer-code mt-5">{url}</pre>
+      </div>
+    ))}
+  </section>
+
+  <section class="mt-16 brand-shell px-6 py-8 sm:px-10">
+    <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+      <div>
+        <span class="brand-kicker">Recommended Flow</span>
+        <h2 class="mt-4 text-3xl font-bold tracking-[-0.04em] text-primary-900">Explore from gateway first, then go service by service.</h2>
+      </div>
+      <div class="space-y-4 text-sm leading-7 text-neutral-600">
+        <div class="rounded-2xl border border-primary-100 bg-white px-4 py-4">
+          <strong class="text-primary-800">For integration:</strong> use the aggregated gateway docs when you need fast discovery and client import.
+        </div>
+        <div class="rounded-2xl border border-sky-100 bg-sky-50/80 px-4 py-4">
+          <strong class="text-primary-800">For debugging:</strong> jump to service-specific specs when you need exact paths, schemas, or contract history.
+        </div>
+      </div>
+    </div>
+  </section>
 </DevLayout>
