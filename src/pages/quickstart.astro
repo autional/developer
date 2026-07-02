@@ -11,8 +11,7 @@ const steps = [
   {
     title: 'Boot the platform',
     copy: 'Start the local Autional stack so the assistant can register tenants, inspect APIs, and verify the final flow against a real environment.',
-    command: `git clone https://github.com/autional/authms
-cd authms
+    command: `# See docs.autional.com for platform setup instructions
 docker compose -f docker-compose.infra.yml -f docker-compose.monolith.yml up -d`,
   },
   {
