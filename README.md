@@ -1,25 +1,19 @@
-# Autional Developers
+# Autional Developer Portal
 
-开发者站点，服务于 Autional SDK、Quickstart、Migration 与 API Reference 等面向集成开发者的内容展示。
+**Domain**: developer.autional.com
+**Stack**: Astro 5 + Tailwind 3.4
+**Repository**: [github.com/autional/developer](https://github.com/autional/developer)
 
-基于 [Astro](https://astro.build) 构建，部署目标为静态站点。
+Developer-facing portal for the Autional SDK, quickstart guides, migration paths, and API reference.
 
 ## Development
 
 ```bash
 pnpm install
-pnpm dev
-pnpm build
+pnpm dev      # http://localhost:4433
+pnpm build    # Static output to dist/
 ```
 
-默认本地端口：`4433`
+## Deploy
 
-## Project Docs
-
-- 详细变更说明：`docs/2026-06-30-developer-site-brand-refresh.md`
-- UI / 品牌落地规范：`docs/website-ui-brand-guidelines.md`
-
-## Notes
-
-- 当前项目本次品牌化改造已通过 `npx astro check`
-- 若后续继续扩展页面，请优先遵循 `docs/website-ui-brand-guidelines.md`
+Push to `main` — Vercel auto-deploys.
