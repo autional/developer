@@ -3,3 +3,6 @@ dist/
 .vite/
 .astro/
 .env
+
+# B2 构建前生成物（scripts/gen-static.mjs 按 SITE_URL 生成；勿手改、勿入库）
+public/robots.txt
