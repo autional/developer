@@ -1,0 +1,305 @@
+{
+  "lang": {
+    "switchToEn": "Switch to English",
+    "switchToZh": "Switch to Chinese"
+  },
+  "nav": {
+    "sdk": "SDK",
+    "quickstart": "Quickstart",
+    "migration": "Migration",
+    "api": "API"
+  },
+  "layout": {
+    "meta": {
+      "title": "Autional for Developers",
+      "description": "Autional developer portal — SDKs, quickstart guides, migration playbooks, and API references for integrating identity infrastructure."
+    },
+    "logoAlt": "Autional logo",
+    "brandSubtitle": "Developers",
+    "jsonLdDescription": "SDKs, quickstart guides, and migration playbooks for the Autional identity platform.",
+    "aria": {
+      "openMenu": "Open navigation menu"
+    },
+    "chrome": {
+      "docs": "Docs",
+      "apiReference": "API Reference",
+      "wiki": "API Wiki",
+      "github": "GitHub"
+    },
+    "footer": {
+      "intro": "Developer-ready identity infrastructure with SDKs, migration guides, OpenAPI references, and integration paths for modern product teams.",
+      "sitesTitle": "Portals",
+      "contactTitle": "Contact",
+      "companySite": "Company Site"
+    }
+  },
+  "notFound": {
+    "meta": {
+      "title": "Page Not Found — Autional Developers",
+      "description": "The page you requested does not exist or has been moved. Continue browsing from the entry points below: SDK, quickstart, migration, and API reference."
+    },
+    "kicker": "404",
+    "title": "Page Not Found",
+    "lead": "The page you requested does not exist or has been moved. Check the link, or continue from the entry points below.",
+    "links": [
+      {
+        "label": "SDK",
+        "description": "Published @autional packages on npm with install commands."
+      },
+      {
+        "label": "Quickstart",
+        "description": "Boot the platform, hand the integration prompt to your assistant, and verify the result."
+      },
+      {
+        "label": "Migration",
+        "description": "Cut-over paths from Auth0, Clerk, Firebase Auth, or Keycloak."
+      },
+      {
+        "label": "API Reference",
+        "description": "Interactive gateway docs and per-service OpenAPI specs."
+      }
+    ]
+  },
+  "index": {
+    "meta": {
+      "title": "SDK — Autional Developers",
+      "description": "Autional SDK — 31 published packages under the @autional scope: React auth SDK, per-service API clients, framework adapters, and the onboarding CLI, with quickstart and API reference."
+    },
+    "kicker": "Developer Platform",
+    "title": "Ship identity faster with production-ready SDKs and API clients.",
+    "lead": "Autional gives your team a unified package surface for authentication, MFA, tenants, passkeys, sessions, and policy-heavy enterprise flows without stitching together multiple vendors.",
+    "cta": {
+      "quickstart": "Start In 3 Steps",
+      "api": "Browse API Reference"
+    },
+    "highlights": {
+      "packages": "Packages",
+      "apiClients": "API Clients",
+      "microservices": "Microservices"
+    },
+    "install": {
+      "title": "Quick Install",
+      "publishedSuffix": " published packages"
+    },
+    "chips": {
+      "sso": "Enterprise SSO",
+      "passkey": "Passkey",
+      "rbac": "RBAC",
+      "tenantIsolation": "Tenant Isolation"
+    },
+    "packages": {
+      "kicker": "Packages",
+      "titleA": "All ",
+      "titleB": " @autional packages published on npm.",
+      "viewMigration": "View migration guides"
+    },
+    "usage": {
+      "kicker": "Usage Model",
+      "title": "One package surface, many deployment paths.",
+      "body": "Install the React SDK to complete app integration; reach for the REST endpoints when you need finer control (see the API reference); keep the migration playbooks nearby when moving from an existing auth provider.",
+      "fastLabel": "Fast start:",
+      "fastBody": " install the SDK and wire auth hooks into your components.",
+      "deepLabel": "Deep integration:",
+      "deepBody": " call the REST endpoints directly; see the gateway docs for the endpoint overview.",
+      "entLabel": "Enterprise rollout:",
+      "entBody": " use the migration playbooks and tenant-aware configuration."
+    },
+    "clients": {
+      "kicker": "API Clients",
+      "title": "Per-service clients, published.",
+      "badge": "Published",
+      "leadA": "All ",
+      "leadB": " per-service clients ship with the main SDK line on npm; you can also call the REST endpoints directly (see ",
+      "leadLink": "API reference",
+      "leadC": ")."
+    },
+    "final": {
+      "kicker": "Ready To Ship",
+      "title": "Install once. Keep auth coherent across app, API, and tenant boundaries.",
+      "lead": "Start with the React SDK; reach for the REST endpoints when you need service-level control; keep the migration playbooks nearby for enterprise cutover."
+    }
+  },
+  "quickstart": {
+    "meta": {
+      "title": "Quickstart — Autional Developers",
+      "description": "Add Autional authentication to your app — AI-assisted quickstart: boot the platform, hand the integration prompt to your assistant, and verify against the live API."
+    },
+    "kicker": "Quickstart",
+    "title": "Add authentication to an existing app in one guided run.",
+    "lead": "This quickstart is built for teams using AI-assisted integration: start the Autional stack, hand the structured integration prompt to your assistant, then verify the result against live APIs rather than mock flows.",
+    "cta": {
+      "sdk": "Browse SDK Packages",
+      "migration": "See Migration Guides"
+    },
+    "prereq": {
+      "kicker": "Prerequisites",
+      "items": [
+        "A running Autional environment (self-hosted: start locally with Docker; cloud hosting is on the roadmap).",
+        "Your application source code ready for SDK integration.",
+        "An AI coding assistant such as Cursor, Claude Code, or another capable LLM."
+      ],
+      "note": "A standard SaaS application usually reaches a first working integration in about 30 minutes when the assistant can inspect the real codebase."
+    },
+    "steps": {
+      "kicker": "Three Steps",
+      "title": "Move from blank integration to verified auth flow.",
+      "items": [
+        {
+          "title": "Boot the platform",
+          "copy": "Start the local Autional stack so the assistant can register tenants, inspect APIs, and verify the final flow against a real environment.",
+          "cmdA": "# Full deployment steps: "
+        },
+        {
+          "title": "Give the assistant the integration prompt",
+          "copy": "Hand the assistant a structured prompt so it can analyze the project, pick the right SDK package, and land a verifiable integration.",
+          "cmdA": "Read ",
+          "cmdB": " and use it to add Autional login to the current project.\nIf it is not reachable, use the mirror:\n"
+        },
+        {
+          "title": "Review and validate",
+          "copy": "Once the code is generated, verify tenant registration, proxy rules, and end-to-end auth behavior before rolling the change out to your team.",
+          "cmdA": "# Open ",
+          "cmdB": " in the browser\nnpm test"
+        }
+      ]
+    },
+    "outcomes": {
+      "kicker": "What You Get",
+      "items": [
+        "Authentication flows: login, registration, logout, token refresh, and profile retrieval.",
+        "Security defaults: SHA-256 password transmission, JWT verification, and tenant-aware flows.",
+        "Operational setup: proxy guidance that avoids cross-origin issues during local development.",
+        "Project hygiene: integration notes your team can keep after the AI finishes the first pass."
+      ]
+    },
+    "issues": {
+      "kicker": "Common Issues",
+      "head": {
+        "issue": "Issue",
+        "resolution": "Resolution"
+      },
+      "rows": [
+        {
+          "issue": "API returns 404",
+          "resolution": "Check that the request path includes the /tenant/ segment, for example /bff/tenant/api/v1/tenant/public/tenants."
+        },
+        {
+          "issue": "Password error",
+          "resolution": "Use SHA-256(rawPassword + \"|\" + tenantId) when testing the login payload."
+        },
+        {
+          "issue": "CORS errors",
+          "resolution": "Configure framework rewrites or a development proxy instead of calling the gateway directly from the browser."
+        },
+        {
+          "issue": "Build fails: Uint32Array",
+          "resolution": "Add \"downlevelIteration\": true to tsconfig.json if your target tooling requires it."
+        },
+        {
+          "issue": "appId required",
+          "resolution": "Set appId to any non-empty identifier such as the current project name."
+        }
+      ]
+    }
+  },
+  "migration": {
+    "meta": {
+      "title": "Migration Guide — Autional Developers",
+      "description": "Migrate from Auth0, Clerk, Firebase Auth, or Keycloak to Autional. Cut-over playbooks with step-by-step instructions."
+    },
+    "kicker": "Migration Guides",
+    "title": "Cut over from your current auth stack without losing control.",
+    "lead": "These playbooks cover the key migration work: tenant setup, user export and import, SDK replacement, policy mapping, and final verification; ground each step with the docs site and the API reference.",
+    "estPrefix": "Est. ",
+    "providers": {
+      "auth0": {
+        "title": "From Auth0",
+        "time": "1-2 days",
+        "steps": [
+          "Create an Autional tenant → configure Auth0 as IdP",
+          "Export Auth0 rules → rebuild with Autional RBAC roles and policies",
+          "Update the SDK from auth0-js to @autional/react",
+          "Verify token validation with the Autional JWKS endpoint"
+        ]
+      },
+      "clerk": {
+        "title": "From Clerk",
+        "time": "2-3 days",
+        "steps": [
+          "Export users via the Clerk API → import into an Autional tenant",
+          "Replace Clerk components with @autional/react components",
+          "Update webhook endpoints to the Autional event format",
+          "Verify SSO + MFA configuration on the Autional admin console"
+        ]
+      },
+      "firebase": {
+        "title": "From Firebase Auth",
+        "time": "3-5 days",
+        "steps": [
+          "Export users from Firebase → import via the Autional admin API",
+          "Replace the Firebase SDK with @autional/react",
+          "Migrate custom claims to Autional RBAC roles",
+          "Reconfigure social login providers in Autional"
+        ]
+      },
+      "keycloak": {
+        "title": "From Keycloak",
+        "time": "3-5 days",
+        "steps": [
+          "Export the Keycloak realm → Autional tenant config",
+          "Synchronize users via the SCIM 2.0 protocol",
+          "Map Keycloak roles to Autional RBAC",
+          "Update the application SDK to @autional/react"
+        ]
+      }
+    },
+    "bottom": {
+      "title": "Ready to migrate?",
+      "lead": "See the quickstart for onboarding, the docs site for platform deployment and application docs, and the API reference for endpoint details.",
+      "docs": "Read the Docs"
+    }
+  },
+  "api": {
+    "meta": {
+      "title": "API Reference — Autional Developers",
+      "description": "Autional API reference for developers — 1,400+ REST endpoints across 27 microservices, with interactive docs and per-service OpenAPI specs."
+    },
+    "kicker": "API Surface",
+    "title": "1,400+ REST endpoints behind one developer entry point.",
+    "lead": "Browse the interactive API docs in the browser, download each service's OpenAPI spec for client generation and contract checks, or get the SDK and front-end source from GitHub.",
+    "endpoints": [
+      {
+        "name": "Gateway Docs",
+        "description": "Browse all REST endpoints and data models in the browser, served as interactive documentation aggregated by the gateway."
+      },
+      {
+        "name": "Service Specs",
+        "description": "Each of the 27 microservices publishes an OpenAPI spec JSON for client generation and contract checks; the address looks like /specs/<service>-service.json."
+      },
+      {
+        "name": "SDK Source",
+        "description": "The SDK source lives in the autional/sdk repository on GitHub."
+      }
+    ],
+    "flow": {
+      "kicker": "Recommended Flow",
+      "title": "Explore from the gateway first, then go service by service.",
+      "integrationLabel": "For integration:",
+      "integrationBody": " use the gateway interactive docs when you need fast endpoint discovery.",
+      "debugLabel": "For debugging:",
+      "debugBody": " jump to the service-specific OpenAPI specs when you need exact paths or schemas."
+    }
+  },
+  "packages": {
+    "desc": {
+      "react": "React SDK: auth hooks and components",
+      "onboard": "Onboarding CLI: create and onboard React / Vue / Next.js projects",
+      "ui": "React component library",
+      "tokens": "Design tokens (CSS variables)",
+      "tailwindPreset": "Tailwind preset (brand theme)",
+      "shared": "Shared utilities: API client, auth, types, and hooks",
+      "eslintConfig": "Shared ESLint config",
+      "tsconfig": "Shared TypeScript config"
+    }
+  }
+}

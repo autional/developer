@@ -1,0 +1,305 @@
+{
+  "lang": {
+    "switchToEn": "Switch to English",
+    "switchToZh": "Switch to Chinese"
+  },
+  "nav": {
+    "sdk": "SDK",
+    "quickstart": "快速开始",
+    "migration": "迁移",
+    "api": "API"
+  },
+  "layout": {
+    "meta": {
+      "title": "Autional 开发者",
+      "description": "Autional 开发者站 — 提供 SDK、快速开始、迁移路径与 API 参考，帮助你集成身份基础设施。"
+    },
+    "logoAlt": "Autional 徽标",
+    "brandSubtitle": "开发者",
+    "jsonLdDescription": "面向 Autional 身份平台的 SDK、快速开始与迁移路径。",
+    "aria": {
+      "openMenu": "打开导航菜单"
+    },
+    "chrome": {
+      "docs": "文档",
+      "apiReference": "API 参考",
+      "wiki": "API Wiki",
+      "github": "GitHub"
+    },
+    "footer": {
+      "intro": "面向开发者的身份基础设施，提供 SDK、快速开始、迁移路径与 OpenAPI 参考，以及适配现代产品团队的集成路径。",
+      "sitesTitle": "站点",
+      "contactTitle": "联系",
+      "companySite": "公司官网"
+    }
+  },
+  "notFound": {
+    "meta": {
+      "title": "页面未找到 — Autional 开发者",
+      "description": "你访问的页面不存在或已被移动。请从站内入口继续浏览 SDK、快速开始、迁移路径与 API 参考。"
+    },
+    "kicker": "404",
+    "title": "页面未找到",
+    "lead": "你访问的页面不存在或已被移动。请检查链接是否正确，或从下方入口继续浏览。",
+    "links": [
+      {
+        "label": "SDK",
+        "description": "npm 上已发布的 @autional 软件包与安装命令。"
+      },
+      {
+        "label": "快速开始",
+        "description": "启动平台、把接入提示词交给助手、验证集成结果。"
+      },
+      {
+        "label": "迁移路径",
+        "description": "从 Auth0、Clerk、Firebase Auth 或 Keycloak 切换的路径概览。"
+      },
+      {
+        "label": "API 参考",
+        "description": "网关交互式文档与按服务划分的 OpenAPI 规范。"
+      }
+    ]
+  },
+  "index": {
+    "meta": {
+      "title": "SDK — Autional 开发者",
+      "description": "Autional SDK —— @autional 作用域下 31 个已发布软件包：React 认证 SDK、按服务划分的 API 客户端、框架适配器与接入脚手架 CLI，附快速开始与 API 参考。"
+    },
+    "kicker": "开发者平台",
+    "title": "用生产级 SDK 与开放 API，更快交付身份能力。",
+    "lead": "Autional 为你的团队提供统一的身份平台与配套软件包，覆盖认证、MFA、租户、通行密钥（Passkey）、会话，以及策略密集的企业级流程，无需再拼接多个厂商的方案。",
+    "cta": {
+      "quickstart": "3 步开始",
+      "api": "浏览 API 参考"
+    },
+    "highlights": {
+      "packages": "已发布软件包",
+      "apiClients": "API 客户端",
+      "microservices": "微服务"
+    },
+    "install": {
+      "title": "快速安装",
+      "publishedSuffix": " 个已发布包"
+    },
+    "chips": {
+      "sso": "企业级 SSO",
+      "passkey": "通行密钥（Passkey）",
+      "rbac": "RBAC",
+      "tenantIsolation": "租户隔离"
+    },
+    "packages": {
+      "kicker": "软件包",
+      "titleA": "npm 上已发布的 ",
+      "titleB": " 个 @autional 软件包。",
+      "viewMigration": "查看迁移路径"
+    },
+    "usage": {
+      "kicker": "使用方式",
+      "title": "一套软件包体系，多种集成路径。",
+      "body": "安装 React SDK 即可完成应用集成；需要更精细的控制时，直接调用 REST 端点（见 API 参考）；从现有认证服务商迁移时，可随时查阅迁移路径。",
+      "fastLabel": "快速上手：",
+      "fastBody": "安装 SDK，在组件中接入认证 hooks。",
+      "deepLabel": "深度集成：",
+      "deepBody": "直接调用 REST 端点，端点总览见网关文档。",
+      "entLabel": "企业级落地：",
+      "entBody": "使用迁移路径与租户感知的配置。"
+    },
+    "clients": {
+      "kicker": "API 客户端",
+      "title": "按服务划分的客户端已发布。",
+      "badge": "已发布",
+      "leadA": "以上 ",
+      "leadB": " 个按服务划分的客户端已随 SDK 主线发布到 npm；也可以直接调用 REST 端点（见 ",
+      "leadLink": "API 参考",
+      "leadC": "）。"
+    },
+    "final": {
+      "kicker": "准备交付",
+      "title": "一次安装，让认证在应用、API 与租户边界之间保持一致。",
+      "lead": "从 React SDK 开始；需要服务级控制时，直接调用 REST 端点；企业级切换时，可随时查阅迁移路径。"
+    }
+  },
+  "quickstart": {
+    "meta": {
+      "title": "快速开始 — Autional 开发者",
+      "description": "为你的应用接入 Autional 认证 — AI 辅助快速开始：启动平台、把接入提示词交给助手、针对真实 API 验证结果。"
+    },
+    "kicker": "快速开始",
+    "title": "在一次引导式操作中，为现有应用接入认证。",
+    "lead": "本快速开始面向采用 AI 辅助集成的团队：启动 Autional 栈，把结构化的接入提示词交给助手，然后针对真实 API 而非模拟流程验证结果。",
+    "cta": {
+      "sdk": "浏览 SDK 包",
+      "migration": "查看迁移路径"
+    },
+    "prereq": {
+      "kicker": "前置条件",
+      "items": [
+        "一套运行中的 Autional 环境（自托管：本地 Docker 启动；云托管在路线图中）。",
+        "已准备好接入 SDK 的应用源代码。",
+        "一个 AI 编程助手，例如 Cursor、Claude Code 或其他能力相当的 LLM。"
+      ],
+      "note": "当助手能够查看真实代码库时，一个标准的 SaaS 应用通常约 30 分钟即可完成首次可用的集成。"
+    },
+    "steps": {
+      "kicker": "三个步骤",
+      "title": "从零集成到可验证的认证流程。",
+      "items": [
+        {
+          "title": "启动平台",
+          "copy": "启动本地 Autional 栈，让助手能够注册租户、查看 API，并针对真实环境验证最终流程。",
+          "cmdA": "# 完整部署步骤见 "
+        },
+        {
+          "title": "把接入提示词交给助手",
+          "copy": "使用结构化的提示词，让助手能够分析项目、选择合适的 SDK 包，并完成可验证的集成。",
+          "cmdA": "请读取 ",
+          "cmdB": "，并据此为当前项目接入 Autional 登录。\n若打不开，改用国内镜像：\n"
+        },
+        {
+          "title": "检查与验证",
+          "copy": "代码生成后，先验证租户注册、代理规则与端到端认证行为，再把改动交付给团队。",
+          "cmdA": "# 在浏览器打开 ",
+          "cmdB": "\nnpm test"
+        }
+      ]
+    },
+    "outcomes": {
+      "kicker": "你将获得",
+      "items": [
+        "认证流程：登录、注册、登出、令牌刷新与个人资料获取。",
+        "安全默认值：SHA-256 密码传输、JWT 校验，以及租户感知的流程。",
+        "运维配套：在本地开发中避免跨域问题的代理指引。",
+        "项目沉淀：AI 完成第一轮集成后，团队可留存的集成说明。"
+      ]
+    },
+    "issues": {
+      "kicker": "常见问题",
+      "head": {
+        "issue": "问题",
+        "resolution": "解决方案"
+      },
+      "rows": [
+        {
+          "issue": "API 返回 404",
+          "resolution": "检查请求路径是否包含 /tenant/ 段，例如 /bff/tenant/api/v1/tenant/public/tenants。"
+        },
+        {
+          "issue": "密码错误",
+          "resolution": "测试登录请求体时，请使用 SHA-256(rawPassword + \"|\" + tenantId)。"
+        },
+        {
+          "issue": "CORS 错误",
+          "resolution": "请配置框架重写或开发代理，不要从浏览器直接调用网关。"
+        },
+        {
+          "issue": "构建失败：Uint32Array",
+          "resolution": "如果目标工具链需要，请在 tsconfig.json 中添加 \"downlevelIteration\": true。"
+        },
+        {
+          "issue": "缺少 appId",
+          "resolution": "把 appId 设为任意非空标识符，例如当前项目名。"
+        }
+      ]
+    }
+  },
+  "migration": {
+    "meta": {
+      "title": "迁移路径 — Autional 开发者",
+      "description": "从 Auth0、Clerk、Firebase Auth 或 Keycloak 迁移到 Autional 的路径概览与分步操作要点。"
+    },
+    "kicker": "迁移路径",
+    "title": "从现有认证技术栈切换，全程可控。",
+    "lead": "以下路径概览覆盖迁移的关键环节：租户配置、用户导出与导入、SDK 替换、策略映射，以及最终验证；具体实施可结合 docs 文档与 API 参考逐步落地。",
+    "estPrefix": "预计 ",
+    "providers": {
+      "auth0": {
+        "title": "从 Auth0 迁移",
+        "time": "1-2 天",
+        "steps": [
+          "创建 Autional 租户 → 将 Auth0 配置为 IdP",
+          "导出 Auth0 规则 → 用 Autional RBAC 角色与策略重建",
+          "将 SDK 从 auth0-js 更换为 @autional/react",
+          "使用 Autional JWKS 端点验证令牌校验"
+        ]
+      },
+      "clerk": {
+        "title": "从 Clerk 迁移",
+        "time": "2-3 天",
+        "steps": [
+          "通过 Clerk API 导出用户 → 导入到 Autional 租户",
+          "用 @autional/react 组件替换 Clerk 组件",
+          "将 Webhook 端点更新为 Autional 事件格式",
+          "在 Autional 管理控制台验证 SSO + MFA 配置"
+        ]
+      },
+      "firebase": {
+        "title": "从 Firebase Auth 迁移",
+        "time": "3-5 天",
+        "steps": [
+          "从 Firebase 导出用户 → 通过 Autional 管理 API 导入",
+          "用 @autional/react 替换 Firebase SDK",
+          "将自定义声明迁移为 Autional RBAC 角色",
+          "在 Autional 中重新配置社交登录提供商"
+        ]
+      },
+      "keycloak": {
+        "title": "从 Keycloak 迁移",
+        "time": "3-5 天",
+        "steps": [
+          "导出 Keycloak realm → Autional 租户配置",
+          "通过 SCIM 2.0 协议同步用户",
+          "将 Keycloak 角色映射到 Autional RBAC",
+          "将应用 SDK 更新为 @autional/react"
+        ]
+      }
+    },
+    "bottom": {
+      "title": "准备开始迁移？",
+      "lead": "接入流程见快速开始；平台部署与应用文档见 docs 站；接口细节见 API 参考。",
+      "docs": "阅读文档"
+    }
+  },
+  "api": {
+    "meta": {
+      "title": "API 参考 — Autional 开发者",
+      "description": "面向开发者的 Autional API 参考 — 汇聚 27 个微服务的 1,400+ REST 端点，提供交互式文档与按服务划分的 OpenAPI 规范。"
+    },
+    "kicker": "API 概览",
+    "title": "一个开发者入口，汇聚 1,400+ REST 端点。",
+    "lead": "在浏览器中浏览交互式 API 文档，下载各服务的 OpenAPI 规范用于客户端生成与契约检查，或从 GitHub 获取 SDK 与前端项目源码。",
+    "endpoints": [
+      {
+        "name": "网关文档",
+        "description": "在浏览器中浏览全部 REST 端点与数据模型，由网关聚合提供交互式文档。"
+      },
+      {
+        "name": "服务规范",
+        "description": "27 个微服务各自发布 OpenAPI 规范 JSON，可下载用于客户端生成与契约检查；地址形如 /specs/<服务名>-service.json。"
+      },
+      {
+        "name": "SDK 源码",
+        "description": "SDK 源码位于 GitHub 上的 autional/sdk 仓库。"
+      }
+    ],
+    "flow": {
+      "kicker": "推荐流程",
+      "title": "先从网关开始探索，再逐个服务深入。",
+      "integrationLabel": "集成时：",
+      "integrationBody": "需要快速发现接口时，使用网关的交互式文档。",
+      "debugLabel": "调试时：",
+      "debugBody": "需要精确路径或 schema 时，直接查看具体服务的 OpenAPI 规范。"
+    }
+  },
+  "packages": {
+    "desc": {
+      "react": "React SDK：认证 hooks 与组件",
+      "onboard": "接入脚手架 CLI：创建并接入 React / Vue / Next.js 项目",
+      "ui": "React 组件库",
+      "tokens": "设计令牌（CSS 变量）",
+      "tailwindPreset": "Tailwind 预设（品牌主题）",
+      "shared": "共享工具：API client、认证、类型与 hooks",
+      "eslintConfig": "ESLint 共享配置",
+      "tsconfig": "TypeScript 共享配置"
+    }
+  }
+}
