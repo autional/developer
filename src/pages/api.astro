@@ -1,27 +1,32 @@
 ---
 import DevLayout from '../layouts/DevLayout.astro';
+import { t } from '../i18n';
+import { brotherUrl, GITHUB_ORG_URL } from '../lib/site-env';
 
-const endpoints = [
-  ['网关文档', 'https://reference.autional.cn/', '在浏览器中浏览全部 REST 端点与数据模型，由网关聚合提供交互式文档。'],
-  ['服务规范', 'https://reference.autional.cn/specs/identity-service.json', '27 个微服务各自发布 OpenAPI 规范 JSON，可下载用于客户端生成与契约检查；地址形如 /specs/<服务名>-service.json。'],
-  ['SDK 源码', 'https://github.com/autional/sdk', 'SDK 源码位于 GitHub 上的 autional/sdk 仓库。'],
+// 卡片文案键化（data-i18n）；URL 随本区根域 / GitHub 口径派生（结构字段，不随语言切换）。
+const endpointTexts = t('api.endpoints', { returnObjects: true }) as { name: string; description: string }[];
+const endpointUrls = [
+  `${brotherUrl('reference')}/`,
+  `${brotherUrl('reference')}/specs/identity-service.json`,
+  `${GITHUB_ORG_URL}/sdk`,
 ];
+const endpoints = endpointTexts.map((item, index) => ({ ...item, url: endpointUrls[index], index }));
 ---
-<DevLayout title="API 参考 — Autional 开发者" description="面向开发者的 Autional API 参考 — 汇聚 27 个微服务的 1,400+ REST 端点，提供交互式文档与按服务划分的 OpenAPI 规范。">
+<DevLayout title={t('api.meta.title')} description={t('api.meta.description')}>
   <section class="text-center">
-    <span class="brand-kicker">API 概览</span>
-    <h1 class="mt-6 text-5xl font-extrabold tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl">一个开发者入口，汇聚 1,400+ REST 端点。</h1>
-    <p class="page-lead mx-auto mt-6">
-      在浏览器中浏览交互式 API 文档，下载各服务的 OpenAPI 规范用于客户端生成与契约检查，或从 GitHub 获取 SDK 与前端项目源码。
+    <span class="brand-kicker" data-i18n="api.kicker">{t('api.kicker')}</span>
+    <h1 class="mt-6 text-5xl font-extrabold tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl" data-i18n="api.title">{t('api.title')}</h1>
+    <p class="page-lead mx-auto mt-6" data-i18n="api.lead">
+      {t('api.lead')}
     </p>
   </section>
 
   <section class="mt-12 grid gap-5 lg:grid-cols-3">
-    {endpoints.map(([name, url, description]) => (
+    {endpoints.map((item) => (
       <div class="brand-card px-6 py-6">
-        <h2 class="text-xl font-semibold text-primary-900">{name}</h2>
-        <p class="mt-3 text-sm leading-7 text-neutral-600">{description}</p>
-        <pre class="developer-code mt-5"><a href={url} class="underline">{url}</a></pre>
+        <h2 class="text-xl font-semibold text-primary-900" data-i18n={`api.endpoints.${item.index}.name`}>{item.name}</h2>
+        <p class="mt-3 text-sm leading-7 text-neutral-600" data-i18n={`api.endpoints.${item.index}.description`}>{item.description}</p>
+        <pre class="developer-code mt-5"><a href={item.url} class="underline">{item.url}</a></pre>
       </div>
     ))}
   </section>
@@ -29,16 +34,12 @@ const endpoints = [
   <section class="mt-16 brand-shell px-6 py-8 sm:px-10">
     <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <div>
-        <span class="brand-kicker">推荐流程</span>
-        <h2 class="mt-4 page-heading">先从网关开始探索，再逐个服务深入。</h2>
+        <span class="brand-kicker" data-i18n="api.flow.kicker">{t('api.flow.kicker')}</span>
+        <h2 class="mt-4 page-heading" data-i18n="api.flow.title">{t('api.flow.title')}</h2>
       </div>
       <div class="space-y-4 text-sm leading-7 text-neutral-600">
-        <div class="rounded-md border border-primary-100 bg-white px-4 py-4">
-          <strong class="text-primary-800">集成时：</strong>需要快速发现接口时，使用网关的交互式文档。
-        </div>
-        <div class="rounded-md border border-sky-100 bg-sky-50/80 px-4 py-4">
-          <strong class="text-primary-800">调试时：</strong>需要精确路径或 schema 时，直接查看具体服务的 OpenAPI 规范。
-        </div>
+        <div class="rounded-md border border-primary-100 bg-white px-4 py-4"><strong class="text-primary-800" data-i18n="api.flow.integrationLabel">{t('api.flow.integrationLabel')}</strong><span data-i18n="api.flow.integrationBody">{t('api.flow.integrationBody')}</span></div>
+        <div class="rounded-md border border-sky-100 bg-sky-50/80 px-4 py-4"><strong class="text-primary-800" data-i18n="api.flow.debugLabel">{t('api.flow.debugLabel')}</strong><span data-i18n="api.flow.debugBody">{t('api.flow.debugBody')}</span></div>
       </div>
     </div>
   </section>

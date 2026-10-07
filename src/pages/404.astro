@@ -1,26 +1,25 @@
 ---
 import DevLayout from '../layouts/DevLayout.astro';
-const links = [
-  ['SDK', '/', 'npm 上已发布的 @autional 软件包与安装命令。'],
-  ['快速开始', '/quickstart', '启动平台、把接入提示词交给助手、验证集成结果。'],
-  ['迁移路径', '/migration', '从 Auth0、Clerk、Firebase Auth 或 Keycloak 切换的路径概览。'],
-  ['API 参考', '/api', '网关交互式文档与按服务划分的 OpenAPI 规范。'],
-];
+import { t } from '../i18n';
+
+// 链接文案键化；href 为站内结构路由（不随语言切换）。
+const links = t('notFound.links', { returnObjects: true }) as { label: string; description: string }[];
+const hrefs = ['/', '/quickstart', '/migration', '/api'];
 ---
-<DevLayout title="页面未找到 — Autional 开发者" description="你访问的页面不存在或已被移动。请从站内入口继续浏览 SDK、快速开始、迁移路径与 API 参考。">
+<DevLayout title={t('notFound.meta.title')} description={t('notFound.meta.description')}>
   <section class="text-center">
-    <span class="brand-kicker">404</span>
-    <h1 class="mt-6 text-5xl font-extrabold tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl">页面未找到</h1>
-    <p class="page-lead mx-auto mt-6">
-      你访问的页面不存在或已被移动。请检查链接是否正确，或从下方入口继续浏览。
+    <span class="brand-kicker" data-i18n="notFound.kicker">{t('notFound.kicker')}</span>
+    <h1 class="mt-6 text-5xl font-extrabold tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl" data-i18n="notFound.title">{t('notFound.title')}</h1>
+    <p class="page-lead mx-auto mt-6" data-i18n="notFound.lead">
+      {t('notFound.lead')}
     </p>
   </section>
 
   <div class="mx-auto mt-12 grid max-w-3xl gap-4 md:grid-cols-2">
-    {links.map(([label, href, description]) => (
-      <a href={href} class="brand-card block px-6 py-5 no-underline">
-        <div class="text-lg font-semibold text-primary-900">{label}</div>
-        <p class="mt-2 text-sm leading-7 text-neutral-600">{description}</p>
+    {links.map((link, index) => (
+      <a href={hrefs[index]} class="brand-card block px-6 py-5 no-underline">
+        <div class="text-lg font-semibold text-primary-900" data-i18n={`notFound.links.${index}.label`}>{link.label}</div>
+        <p class="mt-2 text-sm leading-7 text-neutral-600" data-i18n={`notFound.links.${index}.description`}>{link.description}</p>
       </a>
     ))}
   </div>

@@ -1,33 +1,36 @@
 ---
 import DevLayout from '../layouts/DevLayout.astro';
-const steps = [
-  { from: 'Auth0', steps: ['创建 Autional 租户 → 将 Auth0 配置为 IdP', '导出 Auth0 规则 → 用 Autional RBAC 角色与策略重建', '将 SDK 从 auth0-js 更换为 @autional/react', '使用 Autional JWKS 端点验证令牌校验'], time: '1-2 天' },
-  { from: 'Clerk', steps: ['通过 Clerk API 导出用户 → 导入到 Autional 租户', '用 @autional/react 组件替换 Clerk 组件', '将 Webhook 端点更新为 Autional 事件格式', '在 Autional 管理控制台验证 SSO + MFA 配置'], time: '2-3 天' },
-  { from: 'Firebase Auth', steps: ['从 Firebase 导出用户 → 通过 Autional 管理 API 导入', '用 @autional/react 替换 Firebase SDK', '将自定义声明迁移为 Autional RBAC 角色', '在 Autional 中重新配置社交登录提供商'], time: '3-5 天' },
-  { from: 'Keycloak', steps: ['导出 Keycloak realm → Autional 租户配置', '通过 SCIM 2.0 协议同步用户', '将 Keycloak 角色映射到 Autional RBAC', '将应用 SDK 更新为 @autional/react'], time: '3-5 天' },
-];
+import { t } from '../i18n';
+import { brotherUrl } from '../lib/site-env';
+
+const providers = (['auth0', 'clerk', 'firebase', 'keycloak'] as const).map((id) => ({
+  id,
+  title: t(`migration.providers.${id}.title`),
+  time: t(`migration.providers.${id}.time`),
+  steps: t(`migration.providers.${id}.steps`, { returnObjects: true }) as string[],
+}));
 ---
-<DevLayout title="迁移路径 — Autional 开发者" description="从 Auth0、Clerk、Firebase Auth 或 Keycloak 迁移到 Autional 的路径概览与分步操作要点。">
+<DevLayout title={t('migration.meta.title')} description={t('migration.meta.description')}>
   <section class="text-center">
-    <span class="brand-kicker">迁移路径</span>
-    <h1 class="mt-6 text-5xl font-extrabold tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl">从现有认证技术栈切换，全程可控。</h1>
-    <p class="page-lead mx-auto mt-6">
-      以下路径概览覆盖迁移的关键环节：租户配置、用户导出与导入、SDK 替换、策略映射，以及最终验证；具体实施可结合 docs 文档与 API 参考逐步落地。
+    <span class="brand-kicker" data-i18n="migration.kicker">{t('migration.kicker')}</span>
+    <h1 class="mt-6 text-5xl font-extrabold tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl" data-i18n="migration.title">{t('migration.title')}</h1>
+    <p class="page-lead mx-auto mt-6" data-i18n="migration.lead">
+      {t('migration.lead')}
     </p>
   </section>
 
   <section class="mt-12 space-y-6">
-    {steps.map((s) => (
+    {providers.map((s) => (
       <div class="brand-card px-6 py-6">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 class="text-2xl font-bold tracking-[var(--letter-spacing-heading-lg)] text-primary-900">从 {s.from} 迁移</h2>
-          <span class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary-700">预计 {s.time}</span>
+          <h2 class="text-2xl font-bold tracking-[var(--letter-spacing-heading-lg)] text-primary-900" data-i18n={`migration.providers.${s.id}.title`}>{s.title}</h2>
+          <span class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary-700"><span data-i18n="migration.estPrefix">{t('migration.estPrefix')}</span><span data-i18n={`migration.providers.${s.id}.time`}>{s.time}</span></span>
         </div>
         <ol class="mt-6 space-y-3">
           {s.steps.map((step, i) => (
             <li class="flex items-start gap-3 text-sm leading-7 text-neutral-600">
               <span class="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-700 text-xs font-bold text-white">{i + 1}</span>
-              <span>{step}</span>
+              <span data-i18n={`migration.providers.${s.id}.steps.${i}`}>{step}</span>
             </li>
           ))}
         </ol>
@@ -36,14 +39,14 @@ const steps = [
   </section>
 
   <section class="mt-16 brand-shell px-6 py-8 text-center sm:px-10">
-    <h2 class="text-2xl font-bold tracking-[var(--letter-spacing-heading-lg)] text-primary-900 sm:text-3xl">准备开始迁移？</h2>
-    <p class="mx-auto mt-3 max-w-2xl text-sm leading-7 text-neutral-600">
-      接入流程见快速开始；平台部署与应用文档见 docs 站；接口细节见 API 参考。
+    <h2 class="text-2xl font-bold tracking-[var(--letter-spacing-heading-lg)] text-primary-900 sm:text-3xl" data-i18n="migration.bottom.title">{t('migration.bottom.title')}</h2>
+    <p class="mx-auto mt-3 max-w-2xl text-sm leading-7 text-neutral-600" data-i18n="migration.bottom.lead">
+      {t('migration.bottom.lead')}
     </p>
     <div class="mt-6 flex flex-wrap justify-center gap-3">
-      <a href="/quickstart" class="brand-button-primary">3 步开始</a>
-      <a href="https://docs.autional.cn/" class="brand-button-secondary">阅读文档</a>
-      <a href="/api" class="brand-button-secondary">浏览 API 参考</a>
+      <a href="/quickstart" class="brand-button-primary" data-i18n="index.cta.quickstart">{t('index.cta.quickstart')}</a>
+      <a href={`${brotherUrl('docs')}/`} class="brand-button-secondary" data-i18n="migration.bottom.docs">{t('migration.bottom.docs')}</a>
+      <a href="/api" class="brand-button-secondary" data-i18n="index.cta.api">{t('index.cta.api')}</a>
     </div>
   </section>
 </DevLayout>

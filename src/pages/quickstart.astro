@@ -1,96 +1,93 @@
 ---
 import DevLayout from '../layouts/DevLayout.astro';
+import { t } from '../i18n';
+import { brotherUrl, CDN_HOST } from '../lib/site-env';
 
-const prerequisites = [
-  '一套运行中的 Autional 环境（自托管：本地 Docker 启动；云托管在路线图中）。',
-  '已准备好接入 SDK 的应用源代码。',
-  '一个 AI 编程助手，例如 Cursor、Claude Code 或其他能力相当的 LLM。',
-];
+// 命令块分段渲染：文案段键化（data-i18n，客户端可切换），区域派生 URL 段随构建根域定死（不随语言切换）。
+type CmdSegment = { key?: string; text?: string };
 
-const steps = [
+const prerequisites = t('quickstart.prereq.items', { returnObjects: true }) as string[];
+const outcomes = t('quickstart.outcomes.items', { returnObjects: true }) as string[];
+const issues = t('quickstart.issues.rows', { returnObjects: true }) as { issue: string; resolution: string }[];
+
+const steps: { titleKey: string; copyKey: string; command: CmdSegment[] }[] = [
   {
-    title: '启动平台',
-    copy: '启动本地 Autional 栈，让助手能够注册租户、查看 API，并针对真实环境验证最终流程。',
-    command: `# 完整部署步骤见 https://docs.autional.cn/deployment/
-docker compose -f docker-compose.infra.yml -f docker-compose.monolith.yml up -d`,
+    titleKey: 'quickstart.steps.items.0.title',
+    copyKey: 'quickstart.steps.items.0.copy',
+    command: [
+      { key: 'quickstart.steps.items.0.cmdA' },
+      { text: `${brotherUrl('docs')}/deployment/` },
+      { text: '\ndocker compose -f docker-compose.infra.yml -f docker-compose.monolith.yml up -d' },
+    ],
   },
   {
-    title: '把接入提示词交给助手',
-    copy: '使用结构化的提示词，让助手能够分析项目、选择合适的 SDK 包，并完成可验证的集成。',
-    command: `请读取 https://www.autional.cn/ai/skill.md，并据此为当前项目接入 Autional 登录。
-若打不开，改用国内镜像：
-https://cdn.autional.cn/ai/latest/SKILL.md`,
+    titleKey: 'quickstart.steps.items.1.title',
+    copyKey: 'quickstart.steps.items.1.copy',
+    command: [
+      { key: 'quickstart.steps.items.1.cmdA' },
+      { text: `${brotherUrl('www')}/ai/skill.md` },
+      { key: 'quickstart.steps.items.1.cmdB' },
+      { text: `${CDN_HOST}/ai/latest/SKILL.md` },
+    ],
   },
   {
-    title: '检查与验证',
-    copy: '代码生成后，先验证租户注册、代理规则与端到端认证行为，再把改动交付给团队。',
-    command: `curl http://localhost:11080/health
-# 在浏览器打开 http://localhost:11080/docs/
-npm test`,
+    titleKey: 'quickstart.steps.items.2.title',
+    copyKey: 'quickstart.steps.items.2.copy',
+    command: [
+      { text: 'curl http://localhost:11080/health\n' },
+      { key: 'quickstart.steps.items.2.cmdA' },
+      { text: 'http://localhost:11080/docs/' },
+      { key: 'quickstart.steps.items.2.cmdB' },
+    ],
   },
-];
-
-const outcomes = [
-  '认证流程：登录、注册、登出、令牌刷新与个人资料获取。',
-  '安全默认值：SHA-256 密码传输、JWT 校验，以及租户感知的流程。',
-  '运维配套：在本地开发中避免跨域问题的代理指引。',
-  '项目沉淀：AI 完成第一轮集成后，团队可留存的集成说明。',
-];
-
-const issues = [
-  ['API 返回 404', '检查请求路径是否包含 /tenant/ 段，例如 /bff/tenant/api/v1/tenant/public/tenants。'],
-  ['密码错误', '测试登录请求体时，请使用 SHA-256(rawPassword + "|" + tenantId)。'],
-  ['CORS 错误', '请配置框架重写或开发代理，不要从浏览器直接调用网关。'],
-  ['构建失败：Uint32Array', '如果目标工具链需要，请在 tsconfig.json 中添加 "downlevelIteration": true。'],
-  ['缺少 appId', '把 appId 设为任意非空标识符，例如当前项目名。'],
 ];
 ---
-<DevLayout title="快速开始 — Autional 开发者" description="为你的应用接入 Autional 认证 — AI 辅助快速开始：启动平台、把接入提示词交给助手、针对真实 API 验证结果。">
+<DevLayout title={t('quickstart.meta.title')} description={t('quickstart.meta.description')}>
   <section class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
     <div>
-      <span class="brand-kicker">快速开始</span>
-      <h1 class="mt-6 text-5xl font-extrabold leading-[var(--line-height-display-xl)] sm:leading-[var(--line-height-display-xl)] tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl">
-        在一次引导式操作中，为现有应用接入认证。
+      <span class="brand-kicker" data-i18n="quickstart.kicker">{t('quickstart.kicker')}</span>
+      <h1 class="mt-6 text-5xl font-extrabold leading-[var(--line-height-display-xl)] sm:leading-[var(--line-height-display-xl)] tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl" data-i18n="quickstart.title">
+        {t('quickstart.title')}
       </h1>
-      <p class="mt-6 page-lead">
-        本快速开始面向采用 AI 辅助集成的团队：启动 Autional 栈，把结构化的接入提示词交给助手，然后针对真实 API 而非模拟流程验证结果。
+      <p class="mt-6 page-lead" data-i18n="quickstart.lead">
+        {t('quickstart.lead')}
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/" class="brand-button-primary">浏览 SDK 包</a>
-        <a href="/migration" class="brand-button-secondary">查看迁移路径</a>
+        <a href="/" class="brand-button-primary" data-i18n="quickstart.cta.sdk">{t('quickstart.cta.sdk')}</a>
+        <a href="/migration" class="brand-button-secondary" data-i18n="quickstart.cta.migration">{t('quickstart.cta.migration')}</a>
       </div>
     </div>
 
     <div class="brand-card px-6 py-6">
-      <span class="brand-kicker">前置条件</span>
+      <span class="brand-kicker" data-i18n="quickstart.prereq.kicker">{t('quickstart.prereq.kicker')}</span>
       <ul class="mt-6 space-y-3">
-        {prerequisites.map((item) => (
+        {prerequisites.map((item, index) => (
           <li class="flex gap-3 text-sm leading-7 text-neutral-600">
             <span class="mt-2 h-2.5 w-2.5 rounded-full bg-sky-400"></span>
-            <span>{item}</span>
+            <span data-i18n={`quickstart.prereq.items.${index}`}>{item}</span>
           </li>
         ))}
       </ul>
-      <div class="mt-6 rounded-md border border-amber-100 bg-amber-50/80 px-4 py-4 text-sm leading-7 text-neutral-700">
-        当助手能够查看真实代码库时，一个标准的 SaaS 应用通常约 30 分钟即可完成首次可用的集成。
+      <div class="mt-6 rounded-md border border-amber-100 bg-amber-50/80 px-4 py-4 text-sm leading-7 text-neutral-700" data-i18n="quickstart.prereq.note">
+        {t('quickstart.prereq.note')}
       </div>
     </div>
   </section>
 
   <section class="page-section">
     <div>
-      <span class="brand-kicker">三个步骤</span>
-      <h2 class="mt-4 page-heading">从零集成到可验证的认证流程。</h2>
+      <span class="brand-kicker" data-i18n="quickstart.steps.kicker">{t('quickstart.steps.kicker')}</span>
+      <h2 class="mt-4 page-heading" data-i18n="quickstart.steps.title">{t('quickstart.steps.title')}</h2>
     </div>
     <div class="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
       {steps.map((step, index) => (
         <div class="brand-card px-6 py-6">
           <div class="flex items-center gap-3">
             <span class="flex h-10 w-10 items-center justify-center rounded-full bg-primary-700 text-sm font-bold text-white">{index + 1}</span>
-            <h3 class="text-xl font-semibold text-primary-900">{step.title}</h3>
+            <h3 class="text-xl font-semibold text-primary-900" data-i18n={step.titleKey}>{t(step.titleKey)}</h3>
           </div>
-          <p class="mt-4 text-sm leading-7 text-neutral-600">{step.copy}</p>
-          <pre class="developer-code mt-5">{step.command}</pre>
+          <p class="mt-4 text-sm leading-7 text-neutral-600" data-i18n={step.copyKey}>{t(step.copyKey)}</p>
+          <pre class="developer-code mt-5">{step.command.map((seg) => seg.key ? <span data-i18n={seg.key}>{t(seg.key)}</span> : <span>{seg.text}</span>)}</pre>
         </div>
       ))}
     </div>
@@ -98,29 +95,29 @@ const issues = [
 
   <section class="page-section grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
     <div class="brand-card px-6 py-6">
-      <span class="brand-kicker">你将获得</span>
+      <span class="brand-kicker" data-i18n="quickstart.outcomes.kicker">{t('quickstart.outcomes.kicker')}</span>
       <div class="mt-6 space-y-4">
-        {outcomes.map((item) => (
-          <div class="rounded-md border border-primary-100 bg-primary-50/70 px-4 py-4 text-sm leading-7 text-neutral-700">{item}</div>
+        {outcomes.map((item, index) => (
+          <div class="rounded-md border border-primary-100 bg-primary-50/70 px-4 py-4 text-sm leading-7 text-neutral-700" data-i18n={`quickstart.outcomes.items.${index}`}>{item}</div>
         ))}
       </div>
     </div>
 
     <div class="brand-card px-6 py-6">
-      <span class="brand-kicker">常见问题</span>
+      <span class="brand-kicker" data-i18n="quickstart.issues.kicker">{t('quickstart.issues.kicker')}</span>
       <div class="mt-6 overflow-hidden rounded-lg border border-primary-100">
         <table class="w-full border-collapse text-left text-sm">
           <thead class="bg-primary-900 text-white">
             <tr>
-              <th class="px-4 py-3 font-medium">问题</th>
-              <th class="px-4 py-3 font-medium">解决方案</th>
+              <th class="px-4 py-3 font-medium" data-i18n="quickstart.issues.head.issue">{t('quickstart.issues.head.issue')}</th>
+              <th class="px-4 py-3 font-medium" data-i18n="quickstart.issues.head.resolution">{t('quickstart.issues.head.resolution')}</th>
             </tr>
           </thead>
           <tbody>
-            {issues.map(([issue, solution]) => (
+            {issues.map((row, index) => (
               <tr class="border-t border-primary-100 bg-white">
-                <td class="px-4 py-4 font-medium text-primary-900">{issue}</td>
-                <td class="px-4 py-4 leading-7 text-neutral-600">{solution}</td>
+                <td class="px-4 py-4 font-medium text-primary-900" data-i18n={`quickstart.issues.rows.${index}.issue`}>{row.issue}</td>
+                <td class="px-4 py-4 leading-7 text-neutral-600" data-i18n={`quickstart.issues.rows.${index}.resolution`}>{row.resolution}</td>
               </tr>
             ))}
           </tbody>
