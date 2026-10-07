@@ -1,5 +1,5 @@
 {
-  "name": "@autional/developers",
+  "name": "@autional/developer",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,6 +8,8 @@
     "preview": "astro preview --port 4433"
   },
   "dependencies": {
+    "@autional/tailwind-preset": "0.1.0-rc.9",
+    "@autional/tokens": "0.1.0-rc.15",
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/tailwind": "^6.0.2",
     "astro": "^5.0.0",

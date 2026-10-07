@@ -2,67 +2,67 @@
 import DevLayout from '../layouts/DevLayout.astro';
 
 const prerequisites = [
-  'A running Autional environment, either local Docker or cloud.',
-  'Your application source code ready for SDK integration.',
-  'An AI coding assistant such as Cursor, Claude Code, or another capable LLM.',
+  '一套运行中的 Autional 环境（自托管：本地 Docker 启动；云托管在路线图中）。',
+  '已准备好接入 SDK 的应用源代码。',
+  '一个 AI 编程助手，例如 Cursor、Claude Code 或其他能力相当的 LLM。',
 ];
 
 const steps = [
   {
-    title: 'Boot the platform',
-    copy: 'Start the local Autional stack so the assistant can register tenants, inspect APIs, and verify the final flow against a real environment.',
-    command: `# See docs.autional.com for platform setup instructions
+    title: '启动平台',
+    copy: '启动本地 Autional 栈，让助手能够注册租户、查看 API，并针对真实环境验证最终流程。',
+    command: `# 完整部署步骤见 https://docs.autional.cn/deployment/
 docker compose -f docker-compose.infra.yml -f docker-compose.monolith.yml up -d`,
   },
   {
-    title: 'Give the assistant the migration prompt',
-    copy: 'Use a structured prompt so the assistant can analyze the project, select the right SDK package, and apply the integration with verifiable output.',
-    command: `Use the Autional SDK Migration Skill to add multi-user authentication to my project.
-Follow the 8-phase process: analyze -> recommend -> register -> install -> code -> test -> verify -> finalize.
-Phase 3 (tenant registration): use invitation code AUTHMS-DEV-001.`,
+    title: '把接入提示词交给助手',
+    copy: '使用结构化的提示词，让助手能够分析项目、选择合适的 SDK 包，并完成可验证的集成。',
+    command: `请读取 https://www.autional.cn/ai/skill.md，并据此为当前项目接入 Autional 登录。
+若打不开，改用国内镜像：
+https://cdn.autional.cn/ai/latest/SKILL.md`,
   },
   {
-    title: 'Review and validate',
-    copy: 'Once the code is generated, verify tenant registration, proxy rules, and end-to-end auth behavior before rolling the change to your team.',
+    title: '检查与验证',
+    copy: '代码生成后，先验证租户注册、代理规则与端到端认证行为，再把改动交付给团队。',
     command: `curl http://localhost:11080/health
-open http://localhost:11080/docs/
+# 在浏览器打开 http://localhost:11080/docs/
 npm test`,
   },
 ];
 
 const outcomes = [
-  'Authentication flows: login, registration, logout, refresh, and profile retrieval.',
-  'Security defaults: SHA-256 password transmission, JWT verification, and tenant-aware flows.',
-  'Operational setup: proxy guidance that avoids cross-origin issues during local development.',
-  'Project hygiene: integration notes your team can keep after the AI finishes the first pass.',
+  '认证流程：登录、注册、登出、令牌刷新与个人资料获取。',
+  '安全默认值：SHA-256 密码传输、JWT 校验，以及租户感知的流程。',
+  '运维配套：在本地开发中避免跨域问题的代理指引。',
+  '项目沉淀：AI 完成第一轮集成后，团队可留存的集成说明。',
 ];
 
 const issues = [
-  ['API returns 404', 'Check that the request path includes the /tenant/ segment, for example /bff/tenant/api/v1/tenant/public/tenants.'],
-  ['Password error', 'Use SHA-256(rawPassword + "|" + tenantId) when testing the login payload.'],
-  ['CORS errors', 'Configure framework rewrites or a development proxy instead of calling the gateway directly from the browser.'],
-  ['Build fails: Uint32Array', 'Add "downlevelIteration": true to tsconfig.json if your target tooling requires it.'],
-  ['appId required', 'Set appId to any non-empty identifier such as the current project name.'],
+  ['API 返回 404', '检查请求路径是否包含 /tenant/ 段，例如 /bff/tenant/api/v1/tenant/public/tenants。'],
+  ['密码错误', '测试登录请求体时，请使用 SHA-256(rawPassword + "|" + tenantId)。'],
+  ['CORS 错误', '请配置框架重写或开发代理，不要从浏览器直接调用网关。'],
+  ['构建失败：Uint32Array', '如果目标工具链需要，请在 tsconfig.json 中添加 "downlevelIteration": true。'],
+  ['缺少 appId', '把 appId 设为任意非空标识符，例如当前项目名。'],
 ];
 ---
-<DevLayout title="Quickstart — Autional Developers" description="Add Autional authentication to your app — AI-assisted quickstart for React, Vue, and Next.js in minutes.">
+<DevLayout title="快速开始 — Autional 开发者" description="为你的应用接入 Autional 认证 — AI 辅助快速开始：启动平台、把接入提示词交给助手、针对真实 API 验证结果。">
   <section class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
     <div>
-      <span class="brand-kicker">Quickstart</span>
-      <h1 class="mt-6 text-5xl font-extrabold leading-[1.06] tracking-[-0.06em] text-primary-900 sm:text-6xl">
-        Add authentication to an existing app in one guided run.
+      <span class="brand-kicker">快速开始</span>
+      <h1 class="mt-6 text-5xl font-extrabold leading-[var(--line-height-display-xl)] sm:leading-[var(--line-height-display-xl)] tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl">
+        在一次引导式操作中，为现有应用接入认证。
       </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
-        This quickstart is built for teams using AI-assisted integration. Start the Autional stack, give the assistant a structured migration prompt, and verify the result against live APIs instead of mock flows.
+      <p class="mt-6 page-lead">
+        本快速开始面向采用 AI 辅助集成的团队：启动 Autional 栈，把结构化的接入提示词交给助手，然后针对真实 API 而非模拟流程验证结果。
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/" class="brand-button-primary">Browse SDK Packages</a>
-        <a href="/migration" class="brand-button-secondary">See Migration Guides</a>
+        <a href="/" class="brand-button-primary">浏览 SDK 包</a>
+        <a href="/migration" class="brand-button-secondary">查看迁移路径</a>
       </div>
     </div>
 
-    <div class="brand-card px-6 py-7">
-      <span class="brand-kicker">Prerequisites</span>
+    <div class="brand-card px-6 py-6">
+      <span class="brand-kicker">前置条件</span>
       <ul class="mt-6 space-y-3">
         {prerequisites.map((item) => (
           <li class="flex gap-3 text-sm leading-7 text-neutral-600">
@@ -71,18 +71,18 @@ const issues = [
           </li>
         ))}
       </ul>
-      <div class="mt-6 rounded-2xl border border-amber-100 bg-amber-50/80 px-4 py-4 text-sm leading-7 text-neutral-700">
-        A standard SaaS application usually gets to a first working integration in about 30 minutes when the assistant can inspect the real codebase.
+      <div class="mt-6 rounded-md border border-amber-100 bg-amber-50/80 px-4 py-4 text-sm leading-7 text-neutral-700">
+        当助手能够查看真实代码库时，一个标准的 SaaS 应用通常约 30 分钟即可完成首次可用的集成。
       </div>
     </div>
   </section>
 
-  <section class="mt-16">
+  <section class="page-section">
     <div>
-      <span class="brand-kicker">Three Steps</span>
-      <h2 class="mt-4 text-3xl font-bold tracking-[-0.04em] text-primary-900">Move from blank integration to verified auth flow.</h2>
+      <span class="brand-kicker">三个步骤</span>
+      <h2 class="mt-4 page-heading">从零集成到可验证的认证流程。</h2>
     </div>
-    <div class="mt-8 grid gap-5 lg:grid-cols-3">
+    <div class="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-3">
       {steps.map((step, index) => (
         <div class="brand-card px-6 py-6">
           <div class="flex items-center gap-3">
@@ -96,24 +96,24 @@ const issues = [
     </div>
   </section>
 
-  <section class="mt-16 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
-    <div class="brand-card px-6 py-7">
-      <span class="brand-kicker">What You Get</span>
+  <section class="page-section grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+    <div class="brand-card px-6 py-6">
+      <span class="brand-kicker">你将获得</span>
       <div class="mt-6 space-y-4">
         {outcomes.map((item) => (
-          <div class="rounded-2xl border border-primary-100 bg-primary-50/70 px-4 py-4 text-sm leading-7 text-neutral-700">{item}</div>
+          <div class="rounded-md border border-primary-100 bg-primary-50/70 px-4 py-4 text-sm leading-7 text-neutral-700">{item}</div>
         ))}
       </div>
     </div>
 
-    <div class="brand-card px-6 py-7">
-      <span class="brand-kicker">Common Issues</span>
-      <div class="mt-6 overflow-hidden rounded-3xl border border-primary-100">
+    <div class="brand-card px-6 py-6">
+      <span class="brand-kicker">常见问题</span>
+      <div class="mt-6 overflow-hidden rounded-lg border border-primary-100">
         <table class="w-full border-collapse text-left text-sm">
           <thead class="bg-primary-900 text-white">
             <tr>
-              <th class="px-4 py-3 font-medium">Issue</th>
-              <th class="px-4 py-3 font-medium">Resolution</th>
+              <th class="px-4 py-3 font-medium">问题</th>
+              <th class="px-4 py-3 font-medium">解决方案</th>
             </tr>
           </thead>
           <tbody>

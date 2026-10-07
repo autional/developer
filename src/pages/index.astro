@@ -1,145 +1,135 @@
 ---
 import DevLayout from '../layouts/DevLayout.astro';
-
-const packages = [
-  { name: '@autional/core', desc: 'Token management, API client, auth flows', install: 'npm install @autional/core' },
-  { name: '@autional/react', desc: 'React SDK — AuthProvider, useAuth, RequireAuth', install: 'npm install @autional/react @autional/core' },
-  { name: '@autional/vue', desc: 'Vue 3 SDK — plugin, composables, guards', install: 'npm install @autional/vue @autional/core' },
-  { name: '@autional/next', desc: 'Next.js App Router SDK', install: 'npm install @autional/next @autional/core' },
-  { name: '@autional/node', desc: 'Node.js server middleware', install: 'npm install @autional/node' },
-  { name: '@autional/miniapp', desc: 'WeChat Mini Program adapter', install: 'npm install @autional/miniapp @autional/core' },
-  { name: '@autional/react-native', desc: 'React Native SDK', install: 'npm install @autional/react-native @autional/core' },
-  { name: '@autional/plugin-mfa', desc: 'MFA setup flows', install: 'npm install @autional/plugin-mfa' },
-  { name: '@autional/plugin-passkey', desc: 'Passkey registration and assertion', install: 'npm install @autional/plugin-passkey' },
-  { name: '@autional/plugin-tenant', desc: 'Multi-tenant organization management', install: 'npm install @autional/plugin-tenant' },
-];
-const apis = [
-  'api-identity','api-mfa','api-oauth','api-session','api-profile','api-tenant','api-rbac',
-  'api-billing','api-audit','api-compliance','api-wallet','api-point','api-pay','api-storage',
-  'api-notification','api-communication','api-secret','api-status','api-saml','api-verification',
-];
+import { PACKAGES, API_CLIENTS, SERVICE_COUNT, TOTAL_PACKAGES } from '../data/site-data';
 
 const highlights = [
-  { label: 'Packages', value: '31' },
-  { label: 'API Clients', value: '20+' },
-  { label: 'Microservices', value: '24' },
+  { label: '已发布软件包', value: String(TOTAL_PACKAGES) },
+  { label: 'API 客户端', value: String(API_CLIENTS.length) },
+  { label: '微服务', value: String(SERVICE_COUNT) },
 ];
 ---
-<DevLayout title="SDK — Autional Developers" description="Autional SDK — 31 packages, 20+ API clients for React, Vue, Next.js, Node.js. Ship identity faster with type-safe, production-ready libraries.">
+<DevLayout title="SDK — Autional 开发者" description={`Autional SDK — @autional 作用域下 ${TOTAL_PACKAGES} 个已发布软件包：React 认证 SDK、按服务划分的 API 客户端、框架适配器与接入脚手架 CLI，附快速开始与 API 参考。`}>
   <section class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
     <div>
-      <span class="brand-kicker">Developer Platform</span>
-      <h1 class="mt-6 max-w-3xl text-5xl font-extrabold leading-[1.05] tracking-[-0.06em] text-primary-900 sm:text-6xl">
-        Ship identity faster with production-ready SDKs and API clients.
+      <span class="brand-kicker">开发者平台</span>
+      {/* 此前是 leading-[var(--line-height-display-xl)] sm:leading-[var(--line-height-display-xl)] tracking-[var(--letter-spacing-display-xl)] —— 全部是站点自己发明的字距/行高。
+    -0.06em 在 48px 的中文标题上等于每字收紧 2.88px（-6%），中文字身带边距，
+    收紧到这个程度会明显挤在一起；这正是 U66 第③项说的「display 字距对 CJK 过紧」
+    ——设计系统里早已修到 -0.02em，但**站点里还留着旧值**（上一轮我只查了 ui/ 仓，
+    没查站点，所以漏了）。改为消费设计系统的排版令牌。 */}
+<h1 class="mt-6 max-w-3xl text-5xl font-extrabold leading-[var(--line-height-display-xl)] sm:leading-[var(--line-height-display-xl)] tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl">
+        用生产级 SDK 与开放 API，更快交付身份能力。
       </h1>
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-neutral-600">
-        Autional gives your team a unified package surface for authentication, MFA, tenants, passkeys, sessions, and policy-heavy enterprise flows without stitching together multiple vendors.
+      <p class="mt-6 page-lead max-w-2xl">
+        Autional 为你的团队提供统一的身份平台与配套软件包，覆盖认证、MFA、租户、通行密钥（Passkey）、会话，以及策略密集的企业级流程，无需再拼接多个厂商的方案。
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/quickstart" class="brand-button-primary">Start In 3 Steps</a>
-        <a href="/api" class="brand-button-secondary">Browse API Reference</a>
+        <a href="/quickstart" class="brand-button-primary">3 步开始</a>
+        <a href="/api" class="brand-button-secondary">浏览 API 参考</a>
       </div>
       <div class="mt-10 grid max-w-2xl gap-4 sm:grid-cols-3">
         {highlights.map((item) => (
           <div class="brand-card px-5 py-5">
-            <div class="text-2xl font-extrabold tracking-[-0.05em] text-primary-800">{item.value}</div>
-            <div class="mt-2 text-sm text-neutral-500">{item.label}</div>
+            <div class="text-2xl font-extrabold tracking-[var(--letter-spacing-display-lg)] text-primary-800">{item.value}</div>
+            <div class="mt-2 text-sm text-neutral-600">{item.label}</div>
           </div>
         ))}
       </div>
     </div>
 
-    <div class="developer-panel brand-grid relative overflow-hidden px-6 py-7">
+    <div class="developer-panel brand-grid relative overflow-hidden px-6 py-6">
       <div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-sky-300/10 blur-3xl"></div>
-      <div class="relative flex items-center justify-between text-xs uppercase tracking-[0.28em] text-slate-400">
-        <span>Quick Install</span>
-        <span>React / Vue / Next</span>
+      <div class="relative flex items-center justify-between text-xs uppercase tracking-[0.28em] text-[var(--color-text-muted)]">
+        <span>快速安装</span>
+        <span>{TOTAL_PACKAGES} 个已发布包</span>
       </div>
       <pre class="developer-code mt-5">
-<span class="text-slate-500">$</span> <span class="text-amber-300">npm</span> <span class="text-slate-100">install</span> <span class="text-sky-300">@autional/react</span> <span class="text-sky-300">@autional/core</span>
+<span class="text-syntax-comment">$</span> <span class="text-syntax-string">npm</span> <span class="text-syntax-plain">install</span> <span class="text-syntax-keyword">@autional/react</span>
 
-<span class="text-violet-300">import</span> <span class="text-slate-100">&#123; AuthProvider &#125;</span> <span class="text-violet-300">from</span> <span class="text-emerald-300">'@autional/react'</span>;
+<span class="text-syntax-keyword">import</span> <span class="text-syntax-plain">&#123; useAutional &#125;</span> <span class="text-syntax-keyword">from</span> <span class="text-syntax-function">'@autional/react'</span>;
 
-<span class="text-violet-300">export function</span> <span class="text-amber-300">App</span><span class="text-slate-200">()</span> <span class="text-slate-200">&#123;</span>
-  <span class="text-violet-300">return</span> <span class="text-slate-200">(</span>
-    <span class="text-sky-300">&lt;AuthProvider</span> <span class="text-amber-200">tenant</span><span class="text-slate-200">=</span><span class="text-emerald-300">"demo"</span> <span class="text-sky-300">/&gt;</span>
-  <span class="text-slate-200">)</span>;
-<span class="text-slate-200">&#125;</span>
+<span class="text-syntax-keyword">function</span> <span class="text-syntax-string">App</span><span class="text-syntax-plain">()</span> <span class="text-syntax-plain">&#123;</span>
+  <span class="text-syntax-keyword">const</span> <span class="text-syntax-plain">&#123; isAuthenticated, login &#125;</span> <span class="text-syntax-plain">=</span> <span class="text-syntax-keyword">useAutional</span><span class="text-syntax-plain">()</span>;
+<span class="text-syntax-plain">&#125;</span>
       </pre>
       <div class="mt-6 flex flex-wrap gap-2">
-        <span class="developer-chip">Enterprise SSO</span>
-        <span class="developer-chip">Passkey</span>
+        <span class="developer-chip">企业级 SSO</span>
+        <span class="developer-chip">通行密钥（Passkey）</span>
         <span class="developer-chip">RBAC</span>
-        <span class="developer-chip">Tenant Isolation</span>
+        <span class="developer-chip">租户隔离</span>
       </div>
     </div>
   </section>
 
-  <section class="mt-16">
+  <section class="page-section">
     <div class="flex items-end justify-between gap-4">
       <div>
-        <span class="brand-kicker">Framework SDKs</span>
-        <h2 class="mt-4 text-3xl font-bold tracking-[-0.04em] text-primary-900">Pick the package that matches your runtime.</h2>
+        <span class="brand-kicker">软件包</span>
+        <h2 class="mt-4 page-heading">npm 上已发布的 {TOTAL_PACKAGES} 个 @autional 软件包。</h2>
       </div>
-      <a href="/migration" class="hidden text-sm font-semibold text-primary-700 md:inline-flex">View migration guides</a>
+      <a href="/migration" class="hidden text-sm font-semibold text-primary-700 md:inline-flex">查看迁移路径</a>
     </div>
     <div class="mt-8 grid gap-4">
-      {packages.map((p) => (
+      {PACKAGES.map((p) => (
         <div class="brand-card flex flex-col gap-4 px-6 py-5 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <code class="text-sm font-semibold text-primary-700">{p.name}</code>
             <p class="mt-2 text-sm leading-7 text-neutral-600">{p.desc}</p>
           </div>
-          <code class="inline-flex max-w-full overflow-x-auto rounded-2xl bg-slate-950 px-4 py-3 text-xs leading-6 text-slate-100 lg:max-w-[28rem]">{p.install}</code>
+          <code class="inline-flex max-w-full overflow-x-auto rounded-md bg-code px-4 py-3 text-xs leading-6 text-syntax-plain lg:max-w-[28rem]">{p.install}</code>
         </div>
       ))}
     </div>
   </section>
 
-  <section class="mt-16 grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
-    <div class="brand-card px-6 py-7">
-      <span class="brand-kicker">Usage Model</span>
-      <h2 class="mt-4 text-3xl font-bold tracking-[-0.04em] text-primary-900">One package surface, many deployment paths.</h2>
+  <section class="page-section grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+    <div class="brand-card px-6 py-6">
+      <span class="brand-kicker">使用方式</span>
+      <h2 class="mt-4 page-heading">一套软件包体系，多种集成路径。</h2>
       <p class="mt-4 text-sm leading-7 text-neutral-600">
-        Install a framework package for UI integration, pair it with generated API clients when you need deeper control, and keep migration guides nearby when moving from an existing auth provider.
+        安装 React SDK 即可完成应用集成；需要更精细的控制时，直接调用 REST 端点（见 API 参考）；从现有认证服务商迁移时，可随时查阅迁移路径。
       </p>
       <div class="mt-6 space-y-3 text-sm text-neutral-600">
-        <div class="rounded-2xl border border-primary-100 bg-primary-50/80 px-4 py-3">
-          <strong class="text-primary-800">Fast start:</strong> add a package and wrap your app.
+        <div class="rounded-md border border-primary-100 bg-primary-50/80 px-4 py-3">
+          <strong class="text-primary-800">快速上手：</strong>安装 SDK，在组件中接入认证 hooks。
         </div>
-        <div class="rounded-2xl border border-sky-100 bg-sky-50/80 px-4 py-3">
-          <strong class="text-primary-800">Deep integration:</strong> call generated clients and gateway docs.
+        <div class="rounded-md border border-sky-100 bg-sky-50/80 px-4 py-3">
+          <strong class="text-primary-800">深度集成：</strong>直接调用 REST 端点，端点总览见网关文档。
         </div>
-        <div class="rounded-2xl border border-amber-100 bg-amber-50/80 px-4 py-3">
-          <strong class="text-primary-800">Enterprise rollout:</strong> use migration playbooks and tenant-aware setup.
+        <div class="rounded-md border border-amber-100 bg-amber-50/80 px-4 py-3">
+          <strong class="text-primary-800">企业级落地：</strong>使用迁移路径与租户感知的配置。
         </div>
       </div>
     </div>
 
-    <div class="brand-card px-6 py-7">
+    <div class="brand-card px-6 py-6">
       <div class="flex items-center justify-between gap-4">
         <div>
-          <span class="brand-kicker">Generated Clients</span>
-          <h2 class="mt-4 text-3xl font-bold tracking-[-0.04em] text-primary-900">Bring every service into the same developer workflow.</h2>
+          <span class="brand-kicker">API 客户端</span>
+          <h2 class="mt-4 page-heading">按服务划分的客户端已发布。</h2>
         </div>
-        <span class="hidden rounded-full bg-primary-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary-700 md:inline-flex">OpenAPI synced</span>
+        <span class="hidden rounded-full bg-primary-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-primary-700 md:inline-flex">已发布</span>
       </div>
       <div class="mt-8 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        {apis.map((a) => (
-          <div class="rounded-2xl border border-primary-100/80 bg-white px-4 py-4 shadow-soft">
+        {API_CLIENTS.map((a) => (
+          <div class="rounded-md border border-primary-100/80 bg-white px-4 py-4 shadow-soft">
             <code class="text-xs text-primary-700">@autional/{a}</code>
           </div>
         ))}
       </div>
+      <p class="mt-4 text-xs leading-6 text-neutral-600">
+        以上 {API_CLIENTS.length} 个按服务划分的客户端已随 SDK 主线发布到 npm；也可以直接调用 REST 端点（见 <a href="/api" class="text-primary-700 underline">API 参考</a>）。
+      </p>
     </div>
   </section>
 
   <section class="mt-16 brand-shell px-6 py-10 text-center sm:px-10">
-    <span class="brand-kicker">Ready To Ship</span>
-    <h2 class="mt-5 text-3xl font-bold tracking-[-0.04em] text-primary-900 sm:text-4xl">Install once. Keep auth coherent across app, API, and tenant boundaries.</h2>
+    <span class="brand-kicker">准备交付</span>
+    <h2 class="mt-5 text-3xl font-bold tracking-[var(--letter-spacing-display-lg)] text-primary-900 sm:text-4xl">一次安装，让认证在应用、API 与租户边界之间保持一致。</h2>
     <p class="mx-auto mt-4 max-w-2xl text-base leading-8 text-neutral-600">
-      Start with the framework SDK, reach for the generated clients when you need service-level control, and keep the migration guide nearby for enterprise cutover work.
+      从 React SDK 开始；需要服务级控制时，直接调用 REST 端点；企业级切换时，可随时查阅迁移路径。
     </p>
-    <pre class="developer-code mx-auto mt-6 max-w-xl text-left"><span class="text-slate-500">$</span> <span class="text-amber-300">npm</span> <span class="text-slate-100">install</span> <span class="text-sky-300">@autional/react</span> <span class="text-sky-300">@autional/core</span></pre>
+    <pre class="developer-code mx-auto mt-6 max-w-xl text-left"><span class="text-syntax-comment">$</span> <span class="text-syntax-string">npm</span> <span class="text-syntax-plain">install</span> <span class="text-syntax-keyword">@autional/react</span>
+<span class="text-syntax-comment">$</span> <span class="text-syntax-string">npx</span> <span class="text-syntax-keyword">@autional/onboard</span></pre>
   </section>
 </DevLayout>

@@ -1,8 +1,8 @@
 # Autional Developer Portal
 
-**Domain**: developer.autional.com
+**Domain**: developer.autional.cn
 **Stack**: Astro 5 + Tailwind 3.4
-**Repository**: [github.com/autional/developer](https://github.com/autional/developer)
+**Repository**: [github.com/autional-cn/developer](https://github.com/autional-cn/developer)
 
 Developer-facing portal for the Autional SDK, quickstart guides, migration paths, and API reference.
 

@@ -1,27 +1,27 @@
 ---
 import DevLayout from '../layouts/DevLayout.astro';
 const steps = [
-  { from: 'Auth0', steps: ['Create Autional tenant → configure Auth0 as IdP', 'Export Auth0 rules → migrate to Autional Actions', 'Update SDK from auth0-js to @autional/core', 'Verify token validation with Autional JWKS endpoint'], time: '1-2 days' },
-  { from: 'Clerk', steps: ['Export users via Clerk API → import to Autional tenant', 'Replace Clerk components with @autional/react components', 'Update webhook endpoints to Autional event format', 'Verify SSO + MFA configuration on Autional Admin Console'], time: '2-3 days' },
-  { from: 'Firebase Auth', steps: ['Export users from Firebase → import via Autional Admin API', 'Replace Firebase SDK with @autional/react', 'Migrate custom claims to Autional RBAC roles', 'Reconfigure social login providers in Autional'], time: '3-5 days' },
-  { from: 'Keycloak', steps: ['Export Keycloak realm → Autional tenant config', 'Synchronize users via SCIM 2.0 protocol', 'Map Keycloak roles to Autional RBAC', 'Update application SDK to @autional/\*'], time: '3-5 days' },
+  { from: 'Auth0', steps: ['创建 Autional 租户 → 将 Auth0 配置为 IdP', '导出 Auth0 规则 → 用 Autional RBAC 角色与策略重建', '将 SDK 从 auth0-js 更换为 @autional/react', '使用 Autional JWKS 端点验证令牌校验'], time: '1-2 天' },
+  { from: 'Clerk', steps: ['通过 Clerk API 导出用户 → 导入到 Autional 租户', '用 @autional/react 组件替换 Clerk 组件', '将 Webhook 端点更新为 Autional 事件格式', '在 Autional 管理控制台验证 SSO + MFA 配置'], time: '2-3 天' },
+  { from: 'Firebase Auth', steps: ['从 Firebase 导出用户 → 通过 Autional 管理 API 导入', '用 @autional/react 替换 Firebase SDK', '将自定义声明迁移为 Autional RBAC 角色', '在 Autional 中重新配置社交登录提供商'], time: '3-5 天' },
+  { from: 'Keycloak', steps: ['导出 Keycloak realm → Autional 租户配置', '通过 SCIM 2.0 协议同步用户', '将 Keycloak 角色映射到 Autional RBAC', '将应用 SDK 更新为 @autional/react'], time: '3-5 天' },
 ];
 ---
-<DevLayout title="Migration Guide — Autional Developers" description="Migrate from Auth0, Clerk, Firebase Auth, or Keycloak to Autional. Cut-over playbooks with step-by-step instructions.">
+<DevLayout title="迁移路径 — Autional 开发者" description="从 Auth0、Clerk、Firebase Auth 或 Keycloak 迁移到 Autional 的路径概览与分步操作要点。">
   <section class="text-center">
-    <span class="brand-kicker">Migration Guides</span>
-    <h1 class="mt-6 text-5xl font-extrabold tracking-[-0.06em] text-primary-900 sm:text-6xl">Cut over from your current auth stack without losing control.</h1>
-    <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-neutral-600">
-      These playbooks focus on practical migration work: tenant setup, user export and import, SDK replacement, policy mapping, and final verification.
+    <span class="brand-kicker">迁移路径</span>
+    <h1 class="mt-6 text-5xl font-extrabold tracking-[var(--letter-spacing-display-xl)] text-primary-900 sm:text-6xl">从现有认证技术栈切换，全程可控。</h1>
+    <p class="page-lead mx-auto mt-6">
+      以下路径概览覆盖迁移的关键环节：租户配置、用户导出与导入、SDK 替换、策略映射，以及最终验证；具体实施可结合 docs 文档与 API 参考逐步落地。
     </p>
   </section>
 
-  <section class="mt-14 space-y-6">
+  <section class="mt-12 space-y-6">
     {steps.map((s) => (
       <div class="brand-card px-6 py-6">
         <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 class="text-2xl font-bold tracking-[-0.03em] text-primary-900">From {s.from}</h2>
-          <span class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary-700">Est. {s.time}</span>
+          <h2 class="text-2xl font-bold tracking-[var(--letter-spacing-heading-lg)] text-primary-900">从 {s.from} 迁移</h2>
+          <span class="inline-flex rounded-full bg-primary-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary-700">预计 {s.time}</span>
         </div>
         <ol class="mt-6 space-y-3">
           {s.steps.map((step, i) => (
@@ -33,5 +33,17 @@ const steps = [
         </ol>
       </div>
     ))}
+  </section>
+
+  <section class="mt-16 brand-shell px-6 py-8 text-center sm:px-10">
+    <h2 class="text-2xl font-bold tracking-[var(--letter-spacing-heading-lg)] text-primary-900 sm:text-3xl">准备开始迁移？</h2>
+    <p class="mx-auto mt-3 max-w-2xl text-sm leading-7 text-neutral-600">
+      接入流程见快速开始；平台部署与应用文档见 docs 站；接口细节见 API 参考。
+    </p>
+    <div class="mt-6 flex flex-wrap justify-center gap-3">
+      <a href="/quickstart" class="brand-button-primary">3 步开始</a>
+      <a href="https://docs.autional.cn/" class="brand-button-secondary">阅读文档</a>
+      <a href="/api" class="brand-button-secondary">浏览 API 参考</a>
+    </div>
   </section>
 </DevLayout>
