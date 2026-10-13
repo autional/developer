@@ -63,7 +63,7 @@
   "index": {
     "meta": {
       "title": "SDK — Autional 开发者",
-      "description": "Autional SDK —— @autional 作用域下 31 个已发布软件包：React 认证 SDK、按服务划分的 API 客户端、框架适配器与接入脚手架 CLI，附快速开始与 API 参考。"
+      "description": "Autional SDK —— @autional 作用域下已发布的软件包：认证 SDK、框架适配器、按服务划分的 API 客户端与接入脚手架 CLI，附快速开始与 API 参考。"
     },
     "kicker": "开发者平台",
     "title": "用生产级 SDK 与开放 API，更快交付身份能力。",
@@ -293,11 +293,20 @@
   "packages": {
     "desc": {
       "react": "React SDK：认证 hooks 与组件",
+      "vue": "Vue SDK：createAutional 插件与组合式函数",
+      "next": "Next.js 适配：服务端与客户端",
+      "node": "Node.js 服务端身份客户端",
+      "reactNative": "React Native 适配",
+      "miniapp": "小程序适配",
+      "core": "核心 SDK：框架无关的认证客户端",
       "onboard": "接入脚手架 CLI：创建并接入 React / Vue / Next.js 项目",
       "ui": "React 组件库",
       "tokens": "设计令牌（CSS 变量）",
       "tailwindPreset": "Tailwind 预设（品牌主题）",
       "shared": "共享工具：API client、认证、类型与 hooks",
+      "pluginMfa": "MFA 插件",
+      "pluginPasskey": "通行密钥（Passkey）插件",
+      "pluginTenant": "多租户插件",
       "eslintConfig": "ESLint 共享配置",
       "tsconfig": "TypeScript 共享配置"
     }

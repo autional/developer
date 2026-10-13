@@ -63,7 +63,7 @@
   "index": {
     "meta": {
       "title": "SDK — Autional Developers",
-      "description": "Autional SDK — 31 published packages under the @autional scope: React auth SDK, per-service API clients, framework adapters, and the onboarding CLI, with quickstart and API reference."
+      "description": "Autional SDK — published packages under the @autional scope: auth SDKs, framework adapters, per-service API clients, and the onboarding CLI, with quickstart and API reference."
     },
     "kicker": "Developer Platform",
     "title": "Ship identity faster with production-ready SDKs and API clients.",
@@ -293,11 +293,20 @@
   "packages": {
     "desc": {
       "react": "React SDK: auth hooks and components",
+      "vue": "Vue SDK: createAutional plugin and composables",
+      "next": "Next.js adapters: server and client",
+      "node": "Node.js server-side identity client",
+      "reactNative": "React Native adapter",
+      "miniapp": "Mini-program adapter",
+      "core": "Core SDK: framework-agnostic auth client",
       "onboard": "Onboarding CLI: create and onboard React / Vue / Next.js projects",
       "ui": "React component library",
       "tokens": "Design tokens (CSS variables)",
       "tailwindPreset": "Tailwind preset (brand theme)",
       "shared": "Shared utilities: API client, auth, types, and hooks",
+      "pluginMfa": "MFA plugin",
+      "pluginPasskey": "Passkey plugin",
+      "pluginTenant": "Multi-tenant plugin",
       "eslintConfig": "Shared ESLint config",
       "tsconfig": "Shared TypeScript config"
     }

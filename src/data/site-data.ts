@@ -7,11 +7,20 @@
 
 export const PACKAGES = [
   { name: '@autional/react', descKey: 'packages.desc.react', install: 'npm install @autional/react' },
+  { name: '@autional/vue', descKey: 'packages.desc.vue', install: 'npm install @autional/vue' },
+  { name: '@autional/next', descKey: 'packages.desc.next', install: 'npm install @autional/next' },
+  { name: '@autional/node', descKey: 'packages.desc.node', install: 'npm install @autional/node' },
+  { name: '@autional/react-native', descKey: 'packages.desc.reactNative', install: 'npm install @autional/react-native' },
+  { name: '@autional/miniapp', descKey: 'packages.desc.miniapp', install: 'npm install @autional/miniapp' },
+  { name: '@autional/core', descKey: 'packages.desc.core', install: 'npm install @autional/core' },
   { name: '@autional/onboard', descKey: 'packages.desc.onboard', install: 'npx @autional/onboard' },
   { name: '@autional/ui', descKey: 'packages.desc.ui', install: 'npm install @autional/ui' },
   { name: '@autional/tokens', descKey: 'packages.desc.tokens', install: 'npm install @autional/tokens' },
   { name: '@autional/tailwind-preset', descKey: 'packages.desc.tailwindPreset', install: 'npm install @autional/tailwind-preset' },
   { name: '@autional/shared', descKey: 'packages.desc.shared', install: 'npm install @autional/shared' },
+  { name: '@autional/plugin-mfa', descKey: 'packages.desc.pluginMfa', install: 'npm install @autional/plugin-mfa' },
+  { name: '@autional/plugin-passkey', descKey: 'packages.desc.pluginPasskey', install: 'npm install @autional/plugin-passkey' },
+  { name: '@autional/plugin-tenant', descKey: 'packages.desc.pluginTenant', install: 'npm install @autional/plugin-tenant' },
   { name: '@autional/eslint-config', descKey: 'packages.desc.eslintConfig', install: 'npm install -D @autional/eslint-config' },
   { name: '@autional/tsconfig', descKey: 'packages.desc.tsconfig', install: 'npm install -D @autional/tsconfig' },
 ];
@@ -23,8 +32,8 @@ export const API_CLIENTS = [
   'api-notification', 'api-communication', 'api-secret', 'api-status', 'api-saml', 'api-verification',
 ];
 
-// 主线已发布软件包总数单源（SDK 30 包 + 接入脚手架 CLI；2026-10-07 随 SDK 重命名发版）。
-export const TOTAL_PACKAGES = 31;
+// 已发布软件包总数单源 = 上列核心/适配器/插件包 + 按服务划分的 API 客户端（从数组长度派生，避免字面量漂移）。
+export const TOTAL_PACKAGES = PACKAGES.length + API_CLIENTS.length;
 
 // 家族服务数单源（与 reference 站 / docs 站口径一致）。
 export const SERVICE_COUNT = 27;
