@@ -24,7 +24,8 @@
       "docs": "Docs",
       "apiReference": "API Reference",
       "wiki": "API Wiki",
-      "github": "GitHub"
+      "github": "GitHub",
+      "signIn": "Sign in"
     },
     "footer": {
       "intro": "Developer-ready identity infrastructure with SDKs, migration guides, OpenAPI references, and integration paths for modern product teams.",

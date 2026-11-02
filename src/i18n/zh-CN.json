@@ -24,7 +24,8 @@
       "docs": "文档",
       "apiReference": "API 参考",
       "wiki": "API Wiki",
-      "github": "GitHub"
+      "github": "GitHub",
+      "signIn": "登录"
     },
     "footer": {
       "intro": "面向开发者的身份基础设施，提供 SDK、快速开始、迁移路径与 OpenAPI 参考，以及适配现代产品团队的集成路径。",

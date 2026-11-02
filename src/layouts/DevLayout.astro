@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { t } from '../i18n';
-import { LOCALE, SITE_URL, SITE_ROOT_DOMAIN, brotherUrl, cdnAsset, GITHUB_REPO_URL } from '../lib/site-env';
+import { LOCALE, REGION, SITE_URL, SIBLING_SITE_URL, SITE_ROOT_DOMAIN, brotherUrl, cdnAsset, GITHUB_REPO_URL } from '../lib/site-env';
 
 export interface Props {
   title?: string;
@@ -27,6 +27,7 @@ const chromeLinks = [
   { href: brotherUrl('docs'), labelKey: 'layout.chrome.docs' },
   { href: brotherUrl('reference'), labelKey: 'layout.chrome.apiReference' },
   { href: brotherUrl('wiki'), labelKey: 'layout.chrome.wiki' },
+  { href: `${brotherUrl('auth')}/`, labelKey: 'layout.chrome.signIn' },
   { href: GITHUB_REPO_URL, labelKey: 'layout.chrome.github' },
 ];
 // 切换按钮展示目标语言（本区默认 zh → EN；en → 中文）；初始态与服务端一致，客户端脚本按当前语言重算。
@@ -52,6 +53,10 @@ const chromeLinkClass = 'text-xs font-medium text-primary-500 hover:text-primary
     <meta name="description" content={description} />
     {keywords && <meta name="keywords" content={keywords} />}
     <link rel="canonical" href={canonical.href} />
+    {/* hreflang：同路径在两区的对应页（两区页面结构一一对应）。x-default 指 .com（全球面）。 */}
+    <link rel="alternate" hreflang="zh-CN" href={new URL(pathname, REGION === 'cn' ? SITE_URL : SIBLING_SITE_URL).href} />
+    <link rel="alternate" hreflang="en-US" href={new URL(pathname, REGION === 'com' ? SITE_URL : SIBLING_SITE_URL).href} />
+    <link rel="alternate" hreflang="x-default" href={new URL(pathname, REGION === 'com' ? SITE_URL : SIBLING_SITE_URL).href} />
     <meta name="theme-color" content="#003153">
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -86,7 +91,7 @@ const chromeLinkClass = 'text-xs font-medium text-primary-500 hover:text-primary
               <div class="text-xs font-medium uppercase tracking-[0.28em] text-[var(--color-text-muted)]" data-i18n="layout.brandSubtitle">{t('layout.brandSubtitle')}</div>
             </div>
           </a>
-          <div class="hidden items-center gap-5 md:flex">
+          <div class="hidden items-center gap-5 lg:flex">
             <nav class="flex items-center gap-5">
               {navigation.map((item) => (
                 <a href={item.href} class="developer-nav-link" data-active={pathname === item.href ? 'true' : 'false'} data-i18n={item.labelKey}>{t(item.labelKey)}</a>
@@ -99,7 +104,7 @@ const chromeLinkClass = 'text-xs font-medium text-primary-500 hover:text-primary
             <a href={brotherUrl('www')} class="brand-button-secondary px-4 py-2 text-xs">{SITE_ROOT_DOMAIN}</a>
             <button type="button" data-lang-switch data-lang-target={targetLang} title={targetLangLabel} aria-label={targetLangLabel} class="brand-button-secondary px-4 py-2 text-xs">{targetLang === 'en' ? 'EN' : '中文'}</button>
           </div>
-          <details class="relative md:hidden">
+          <details class="relative lg:hidden">
             <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-xl border border-neutral-200 bg-white/80 text-neutral-700 transition hover:text-primary-700" aria-label={t('layout.aria.openMenu')} data-i18n-aria-label="layout.aria.openMenu">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                 <line x1="4" y1="7" x2="20" y2="7"></line>
