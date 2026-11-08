@@ -15,6 +15,10 @@ const {
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const pathname = Astro.url.pathname;
+// 导航高亮（D-1 修复）：构建产物 pathname 带尾斜杠（/quickstart/），而 href 无斜杠（/quickstart），
+// 直接 `pathname === href` 永不成立 ⇒ 子页永远不高亮。两侧都归一后再比。
+const normalizePath = (p: string) => p.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => normalizePath(pathname) === normalizePath(href);
 const ogImage = new URL('/og-default.png', Astro.site).href;
 const navigation = [
   { href: '/', labelKey: 'nav.sdk' },
@@ -94,7 +98,7 @@ const chromeLinkClass = 'text-xs font-medium text-primary-500 hover:text-primary
           <div class="hidden items-center gap-5 lg:flex">
             <nav class="flex items-center gap-5">
               {navigation.map((item) => (
-                <a href={item.href} class="developer-nav-link" data-active={pathname === item.href ? 'true' : 'false'} data-i18n={item.labelKey}>{t(item.labelKey)}</a>
+                <a href={item.href} class="developer-nav-link" data-active={isActive(item.href) ? 'true' : 'false'} data-i18n={item.labelKey}>{t(item.labelKey)}</a>
               ))}
             </nav>
             <span class="w-px h-5 bg-neutral-200"></span>
@@ -115,7 +119,7 @@ const chromeLinkClass = 'text-xs font-medium text-primary-500 hover:text-primary
             <div class="absolute right-0 top-[calc(100%+var(--space-2))] z-50 w-64 rounded-md border border-neutral-100 bg-white px-4 py-4 shadow-brand">
               <nav class="grid gap-1">
                 {navigation.map((item) => (
-                  <a href={item.href} class="developer-nav-link py-2" data-active={pathname === item.href ? 'true' : 'false'} data-i18n={item.labelKey}>{t(item.labelKey)}</a>
+                  <a href={item.href} class="developer-nav-link py-2" data-active={isActive(item.href) ? 'true' : 'false'} data-i18n={item.labelKey}>{t(item.labelKey)}</a>
                 ))}
               </nav>
               <div class="my-3 h-px bg-neutral-100"></div>
